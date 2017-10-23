@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{f7e00496-75dc-4263-8140-5f7c821aad7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Texture">
+      <UniqueIdentifier>{32d50582-311d-4d96-8a2b-3eb74ecc5c81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Animation">
+      <UniqueIdentifier>{09174cdf-0e6c-4cd0-8787-d899452b952c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{121173be-3d3c-4dd9-ae74-89744dbf31bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Texture">
+      <UniqueIdentifier>{f4e7996e-a4f7-466f-a79a-942c1baff7a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Public">
+      <UniqueIdentifier>{f48e2d06-82cd-4f40-8d57-218c1906a9f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Animation">
+      <UniqueIdentifier>{ba77c817-1109-427d-975d-3231aadfd874}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Utils">
+      <UniqueIdentifier>{ad108dd5-d9a5-4612-8086-3a650444039a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Utils">
+      <UniqueIdentifier>{cfe64a16-3c54-44e8-81a8-7a743f7f235e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Camera">
+      <UniqueIdentifier>{f386efa8-f26a-41ad-898a-3d15e33c0a54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Camera">
+      <UniqueIdentifier>{8ec671f8-3f50-4327-93af-072a46239292}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Entity">
+      <UniqueIdentifier>{d129b14b-6acf-4c7f-8634-0158c73a3480}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Map">
+      <UniqueIdentifier>{9d7ccd7e-395f-48fd-9cff-a08560245034}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Entity">
+      <UniqueIdentifier>{8925820d-349e-462f-863c-715628503944}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Map">
+      <UniqueIdentifier>{ba07db24-c0cf-4ad8-b622-0712bde2d422}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Map\Tile">
+      <UniqueIdentifier>{3dc0ea19-168c-475f-96e7-94aa48257276}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\Core\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationManager.cpp">
+      <Filter>Source Files\Core\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\Core\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>Source Files\Core\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Source Files\Core\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>Source Files\Core\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Core\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug.cpp">
+      <Filter>Source Files\Core\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Coord.cpp">
+      <Filter>Source Files\Core\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="MapManager.cpp">
+      <Filter>Source Files\Core\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="MNEngine.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files\Core\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\Core\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationManager.h">
+      <Filter>Header Files\Core\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files\Core\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
+      <Filter>Header Files\Core\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Namespace.h">
+      <Filter>Header Files\Core\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureData.h">
+      <Filter>Header Files\Core\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Header Files\Core\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Core\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimType.h">
+      <Filter>Header Files\Core\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>Header Files\Core\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Coord.h">
+      <Filter>Header Files\Core\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="MapManager.h">
+      <Filter>Header Files\Core\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="MNEngine.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\Core\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>Header Files\Core\Map\Tile</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>
