@@ -6,6 +6,7 @@
 #include "Namespace.h"
 #include "MNEngine.h"
 #include "EntityManager.h"
+#include "SFML\Window.hpp"
 
 using namespace csp;
 
@@ -39,8 +40,12 @@ void Camera::init(MNEngine* const ptr){
 	std::cout << "-Screen initialized" << std::endl;
 }
 
+sf::Vector2i Camera::getMousePos(){
+	return sf::Mouse::getPosition();
+}
+
 void Camera::moveCam2P(){
-	sf::Vector2f pVec = sf::Vector2f(enginePtr->EM.player->getPos().getX(), enginePtr->EM.player->getPos().getY());
+	sf::Vector2f pVec = sf::Vector2f(enginePtr->EM.player->getPos().x, enginePtr->EM.player->getPos().y);
 		sf::Vector2f rVec = pVec - camera->getCenter();
 
 		if ((pVec.x - (camera->getSize().x / 2) < 0) || (pVec.x + (camera->getSize().x / 2) >window->getSize().x)){

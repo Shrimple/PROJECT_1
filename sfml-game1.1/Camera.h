@@ -15,6 +15,7 @@ public:
 	sf::RenderWindow* window;
 	void moveCam2P();
 	void init(MNEngine* const);
+	sf::Vector2i getMousePos();
 	Camera();
 	~Camera();
 };

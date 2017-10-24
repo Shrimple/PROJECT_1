@@ -3,32 +3,35 @@
 #include "Animation.h"
 #include "Debug.h"
 #include "EntityManager.h"
+#include "MNEngine.h"
 #include "SFML\Graphics.hpp"
 
 using namespace csp;
 
 
-Player::~Player(){
+Player::~Player() {
 }
 
-void Player::pollMoveE(sf::Event &e, TileMap * map){
+void Player::pollMoveE(sf::Event &e, TileMap * map) {
 	//sprite origin is now middle
-	this->yaw = 0;
+	yaw = 0;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-		this->yaw += 0;
-		this->vX += (this->speed - this->vX);
-	}else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-		this->yaw += 2;
-		this->vX -= (this->speed + this->vX);
+		yaw += 0;
+		velocity.x += (speed - velocity.x);
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+		yaw += 2;
+		velocity.x -= (speed + velocity.x);
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-		this->yaw += 1;
-		this->vY -= (this->speed + this->vY);
-	}else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-		this->yaw += 3;
-		this->vY += (this->speed - this->vY);
+		yaw += 1;
+		velocity.y -= (speed + velocity.y);
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+		yaw += 3;
+		velocity.y += (speed - velocity.y);
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
@@ -40,12 +43,11 @@ void Player::pollMoveE(sf::Event &e, TileMap * map){
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Insert)) {
 		if (Debug::isActive()) {
 			Debug::setState(false);
-		} else {
+		}
+		else {
 			Debug::setState(true);
 		}
-
 	}
-
 
 	/*cout << "pposX:" << pposX << " pposY:" << pposY << " ppos_tileX:" << pposTileX << " ppos_tileY:" << pposTileY << endl;
 	cout << "    " << topTile << endl;

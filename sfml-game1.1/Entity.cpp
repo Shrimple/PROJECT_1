@@ -7,33 +7,37 @@ using namespace csp;
 
 Entity::Entity(MNEngine* const ptr){
 	printf("new entity with INIT settings.");
+	trajectory = Trajectory(this);
 	enginePtr = ptr;
 	tex = 0;
 	type = EntityType::AI_ENEMY;
-	pos.setXY(0, 0);
+	pos.x = 0, pos.y = 0;
 	sprite.setTexture(enginePtr->TM.get(tex));
-	sprite.setPosition(pos.getX(), pos.getY());
+	sprite.setPosition(pos.x, pos.y);
 	yaw = 0;
 	animation = Animation(ptr, tex);
 }
 
 Entity::Entity(MNEngine* const ptr,int textureVectorIndex, EntityType pType) {
 	printf("new entity with textureId #%d\n", textureVectorIndex);
+	trajectory = Trajectory(this);
 	enginePtr = ptr;
 	tex = textureVectorIndex;
 	type = pType;
-	pos.setXY(0, 0);
+	pos.x = 0, pos.y = 0;
 	sprite.setTexture(enginePtr->TM.get(tex));
 	yaw = 0;
 	animation = Animation(ptr, tex);
 }
 
-Entity::Entity(MNEngine* const ptr, int textureVectorIndex, EntityType pType, int xOff, int yOff) {
+Entity::Entity(MNEngine* const ptr, int textureVectorIndex, EntityType pType, float xOff, float yOff) {
 	printf("new entity with textureId #%d\n @offset x=%d, y=%d\n", textureVectorIndex, xOff, yOff);
+	trajectory = Trajectory(this);
 	enginePtr = ptr;
 	tex = textureVectorIndex;
 	type = pType;
-	pos.setXY(xOff + (enginePtr->TILE_SIZE / 2), yOff + (enginePtr->TILE_SIZE / 2));
+	pos.x = xOff + (enginePtr->TILE_SIZE / 2);
+	pos.y = yOff + (enginePtr->TILE_SIZE / 2);
 	sprite.setTexture(enginePtr->TM.get(tex));
 	sprite.setPosition(xOff, yOff);
 	yaw = 0;
@@ -42,25 +46,28 @@ Entity::Entity(MNEngine* const ptr, int textureVectorIndex, EntityType pType, in
 
 void Entity::update(TileMap * map) {
 	//limit velocity to speed in X
-	if ((vX > speed) || (vX < -speed)) {
-		if (vX > 0)
-			vX = speed;
+
+	if ((velocity.x > speed) || (velocity.x < -speed)) {
+		if (velocity.x > 0)
+			velocity.x = speed;
 		else
-			vX = -speed;
+			velocity.x = -speed;
 	}
 
 	//limit velocity to speed in Y
-	if ((vY > speed) || (vY < -speed)) {
-		if (vY > 0)
-			vY = speed;
+	if ((velocity.y > speed) || (velocity.y < -speed)) {
+		if (velocity.y > 0)
+			velocity.y = speed;
 		else
-			vY = -speed;
+			velocity.y = -speed;
 	}
+
+	trajectory.calculateVelXY();
 
 	isColliding(map);
 
 	//move virtual XY coordinates
-	setEntPos(pos.getX()+vX, pos.getY() + vY);
+	setEntPos(pos.x+velocity.x, pos.y + velocity.y);
 
 	//set animation rect
 	sprite.setTextureRect(animation.getRect(tex));
@@ -69,8 +76,8 @@ void Entity::update(TileMap * map) {
 		animation.incFrame();
 	}
 
-	if (vX > 0) vX--; else if (vX < 0) vX++;
-	if (vY > 0) vY--; else if (vY < 0) vY++;
+	if (velocity.x > 0) velocity.x--; else if (velocity.x < 0) velocity.x++;
+	if (velocity.y > 0) velocity.y--; else if (velocity.y < 0) velocity.y++;
 
 }
 
@@ -78,8 +85,8 @@ bool Entity::isColliding(TileMap *map) {
 	bool	collidesX	= false,
 			collidesY	= false;
 
-	float	pposX		= pos.getX(),
-			pposY		= pos.getY();
+	float	pposX		= pos.x,
+			pposY		= pos.y;
 
 	sf::Vector2f topTile	= { pposX , pposY - enginePtr->TILE_SIZE },
 			bottomTile  = { pposX , pposY + enginePtr->TILE_SIZE },
@@ -93,52 +100,52 @@ bool Entity::isColliding(TileMap *map) {
 	int		offsetX		= (int) pposX % (enginePtr->TILE_SIZE),
 			offsetY		= (int) pposY % (enginePtr->TILE_SIZE);
 
-	if (vX > 0 || vY > 0) {
+	if (velocity.x > 0 || velocity.y > 0) {
 		//right
 		if (map->getTile(rightTile.x, rightTile.y).hasCollision) {
-			if (offsetX + vX < 10) {
+			if (offsetX + velocity.x < 10) {
 			}
-			else if (offsetX + vX == 10) {
+			else if (offsetX + velocity.x == 10) {
 			}
-			else if (offsetX + vX > 10) {
-				vX = vX - ((offsetX + vX) - 10);
+			else if (offsetX + velocity.x > 10) {
+				velocity.x = velocity.x - ((offsetX + velocity.x) - 10);
 				collidesX = true;
 			}
 		}
 		//down
 		if (map->getTile(bottomTile.x, bottomTile.y).hasCollision) {
-			if (offsetY + vY < 10) {
+			if (offsetY + velocity.y < 10) {
 			}
-			else if (offsetY + vY == 10) {
+			else if (offsetY + velocity.y == 10) {
 			}
-			else if (offsetY + vY > 10) {
-				vY = vY - ((offsetY + vY) - 10);
+			else if (offsetY + velocity.y > 10) {
+				velocity.y = velocity.y - ((offsetY + velocity.y) - 10);
 				collidesY = true;
 			}
 		}
 	}
 
-	if (vX < 0 || vY < 0) {
+	if (velocity.x < 0 || velocity.y < 0) {
 		//up
 		if (map->getTile(topTile.x, topTile.y).hasCollision) {
-			if (offsetY + vY > 10) {
+			if (offsetY + velocity.y > 10) {
 			}
-			else if (offsetY + vY == 10) {
+			else if (offsetY + velocity.y == 10) {
 			}
-			else if (offsetY + vY < 10) {
-				vY = vY - ((offsetY + vY) - 10);
+			else if (offsetY + velocity.y < 10) {
+				velocity.y = velocity.y - ((offsetY + velocity.y) - 10);
 				collidesY = true;
 			}
 		}
 
 		//left
 		if (map->getTile(leftTile.x, leftTile.y).hasCollision) {
-			if (offsetX + vX > 10) {
+			if (offsetX + velocity.x > 10) {
 			}
-			else if (offsetX + vX == 10) {
+			else if (offsetX + velocity.x == 10) {
 			}
-			else if (offsetX + vX < 10) {
-				vX = vX - ((offsetX + vX) - 10);
+			else if (offsetX + velocity.x < 10) {
+				velocity.x = velocity.x - ((offsetX + velocity.x) - 10);
 				collidesX = true;
 			}
 		}
@@ -159,15 +166,26 @@ void Entity::setDirection(int dir) {
 	}
 }
 
-void Entity::setEntPos(int x, int y) {
-	pos.setXY(x, y);
-	sprite.setPosition(x- enginePtr->TILE_SIZE / 2, y- enginePtr->TILE_SIZE / 2);
+void Entity::setEntPos(float x, float y) {
+	pos.x = x, pos.y = y;
+	sprite.setPosition(x - enginePtr->TILE_SIZE / 2, y - enginePtr->TILE_SIZE / 2);
 }
 
 
 void Entity::setTexture(int texIndex) {
 	tex = texIndex;
 	sprite.setTexture(enginePtr->TM.get(texIndex));
+}
+
+void Entity::setVelocity(float xVel, float yVel) {
+	velocity.x = xVel;
+	velocity.y = yVel;
+}
+
+void Entity::setTrajectory(){
+	trajectory.complete = false;
+	trajectory.setTarget(sf::Mouse::getPosition(*enginePtr->Cam.window));
+	trajectory.calculateVelXY();
 }
 
 

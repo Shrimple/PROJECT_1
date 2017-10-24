@@ -6,6 +6,7 @@
 #include "EntityManager.h"
 #include "MapManager.h"
 #include "TextureManager.h"
+#include "SFML\Window.hpp"
 
 using namespace csp;
 

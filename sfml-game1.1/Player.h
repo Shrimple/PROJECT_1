@@ -9,7 +9,7 @@ class Player : public Entity{
 private:
 	int dir;
 public:
-	Player(MNEngine* const e) :Entity(e, 1, csp::EntityType::PLAYER, 20, 20) {};
+	Player(MNEngine* const e) :Entity(e, 1, csp::EntityType::PLAYER, 220, 220) {};
 	~Player();
 	void pollMoveE(sf::Event &e, TileMap * map);
 };

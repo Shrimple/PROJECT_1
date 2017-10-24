@@ -3,6 +3,7 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+
 MNEngine MNE;
 
 void main() {
@@ -15,11 +16,12 @@ void main() {
 	if (!MNE.MM.loadMap("maptest.txt", "tileset1.png"))
 		std::cout << "map has failed to load." << std::endl;
 
+	//test 
 	MNE.spawnPlayer();
-	MNE.spawnEntity("testen.png", 20, 0);
-	MNE.spawnEntity("testen.png", 40, 0);
-	MNE.spawnEntity("testen.png", 60, 20);
-	MNE.spawnEntity("testen.png", 80, 40);
+	MNE.spawnEntity("testen.png", 120, 110);
+	MNE.spawnEntity("testen.png", 140, 110);
+	MNE.spawnEntity("testen.png", 160, 120);
+	MNE.spawnEntity("testen.png", 180, 140);
 	
 
 	Debug::printEntVec(MNE.EM.getVec());

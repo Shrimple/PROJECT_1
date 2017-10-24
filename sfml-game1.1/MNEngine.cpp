@@ -49,11 +49,15 @@ void MNEngine::pollEvent(){
 			EM.player->pollMoveE(e, MM.getMap());
 		}
 
+		if (e.type == sf::Event::MouseButtonPressed) {
+			std::cout << "mouse x:" << Cam.getMousePos().x << "mouse y:" << Cam.getMousePos().y << std::endl;
+			EM.player->setTrajectory();
+		}
 	}
 }
 
 void MNEngine::moveScreen(){
-	if (Cam.camera->getCenter() != sf::Vector2f(EM.player->getPos().getX(), EM.player->getPos().getY())) {
+	if (Cam.camera->getCenter() != sf::Vector2f(EM.player->getPos().x, EM.player->getPos().y)) {
 		Cam.moveCam2P();
 		Cam.window->setView(*Cam.camera);
 	}
