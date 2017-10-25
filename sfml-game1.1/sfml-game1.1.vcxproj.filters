@@ -167,6 +167,9 @@
     <ClInclude Include="header\Tile.h">
       <Filter>Header Files\Core\Map\Tile</Filter>
     </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
