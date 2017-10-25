@@ -27,7 +27,7 @@ void Camera::init(MNEngine* const ptr){
 	camera = new sf::View();
 
 	camera->reset(sf::FloatRect(0, 0, 200, 200));
-	camera->zoom(1.5);
+	camera->zoom(2);
 
 	std::cout << "Camera properties set." << std::endl;
 
