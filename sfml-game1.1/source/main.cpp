@@ -16,6 +16,7 @@ void main() {
 	if (!MNE.MM.loadMap("maptest.txt", "tileset1.png"))
 		std::cout << "map has failed to load." << std::endl;
 
+	std::cout << "penis." << std::endl;
 	//test 
 	MNE.spawnPlayer();
 	MNE.spawnEntity("testen.png", 120, 110);
