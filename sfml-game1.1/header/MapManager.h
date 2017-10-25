@@ -15,10 +15,10 @@ private:
 	MNEngine* enginePtr;
 
 public:
-	void init(MNEngine*);
-	TileMap* getMap();
-	bool loadMap(std::string mapPath, std::string tileSetPath);
 	MapManager();
 	~MapManager();
+	void init(MNEngine*);
+	bool loadMap(std::string mapPath, std::string tileSetPath);
+	TileMap* getMap();
 };
 #endif

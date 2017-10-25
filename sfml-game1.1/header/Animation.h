@@ -8,9 +8,9 @@ class MNEngine;
 class Animation{
 private:
 	bool loop;
-	AnimType type;
 	int frames;
 	int currentFrame;
+	AnimType type;
 	MNEngine* enginePtr;
 
 public:

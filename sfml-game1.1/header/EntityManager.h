@@ -15,15 +15,16 @@ private:
 	MNEngine* enginePtr;
 
 public:
-	bool init(MNEngine* const);
-	void updateEnts(TileMap*);
 	Player * player;
-	std::vector<boost::shared_ptr<Entity>> getVec();
-	void newPlayerEnt();
-	void newEntity(int texIndex, int xOff, int yOff);
-	Entity &getEnt(int i);
+
 	EntityManager();
 	~EntityManager();
+	std::vector<boost::shared_ptr<Entity>> getVec();
+	Entity &getEnt(int i);
+	bool init(MNEngine* const);
+	void updateEnts(TileMap*);
+	void newPlayerEnt();
+	void newEntity(int texIndex, int xOff, int yOff);
 };
 #endif
 

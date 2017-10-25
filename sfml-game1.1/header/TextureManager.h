@@ -17,11 +17,11 @@ private:
 	std::vector<TextureData> textureVector;
 
 public:
+	TextureManager();
+	~TextureManager();
 	bool init(MNEngine* const);
 	int loadTex(std::string fileName);
 	sf::Texture &get(int i);
 	sf::Texture &get(std::string filename);
-	TextureManager();
-	~TextureManager();
 };
 #endif

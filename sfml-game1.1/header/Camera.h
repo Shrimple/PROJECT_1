@@ -13,9 +13,9 @@ public:
 	sf::Font* dFont;
 	sf::View* camera;
 	sf::RenderWindow* window;
-	void moveCam2P();
-	void init(MNEngine* const);
 	sf::Vector2i getMousePos();
+	void init(MNEngine* const);
+	void moveCam2P();
 	Camera();
 	~Camera();
 };

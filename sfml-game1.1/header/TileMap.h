@@ -14,16 +14,16 @@ class TileMap : public sf::Drawable, public sf::Transformable {
 private:
 	MNEngine* enginePtr;
 	std::array<int, 2048> map;
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-	sf::VertexArray m_vertices;
 	std::string tileset_filename;
+	sf::VertexArray m_vertices;
 	Tile readTile(int tile);
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 public:
-	Tile getTile(int i, int y);
-	void setMap(std::array<int, 2048> pMap);
-	bool load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height);
 	TileMap(MNEngine* const);
 	~TileMap();
+	bool load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height);
+	Tile getTile(int i, int y);
+	void setMap(std::array<int, 2048> pMap);
 };
 #endif

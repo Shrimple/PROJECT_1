@@ -11,11 +11,12 @@ private:
 	MNEngine* enginePtr;
 
 public:
-	void init(MNEngine* const);
 	const int mod = 2;
 	int counter;
+
 	AnimationManager();
 	~AnimationManager();
+	void init(MNEngine* const);
 	void loadAnimFromEnt(boost::shared_ptr<Entity>);
 	void loadAnimFromP(Player *);
 	void loadWorldAnim(TileMap *);
