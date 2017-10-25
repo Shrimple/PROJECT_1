@@ -23,7 +23,7 @@ void main() {
 	MNE.spawnEntity("testen.png", 160, 120);
 	MNE.spawnEntity("testen.png", 180, 140);
 	
-	//my mom is the best
+	//So this is how it works.
 
 	Debug::printEntVec(MNE.EM.getVec());
 
