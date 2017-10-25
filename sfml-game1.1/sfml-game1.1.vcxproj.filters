@@ -63,94 +63,140 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Source Files\Core\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimationManager.cpp">
-      <Filter>Source Files\Core\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
+    <ClCompile Include="source\Trajectory.cpp">
       <Filter>Source Files\Core\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="EntityManager.cpp">
-      <Filter>Source Files\Core\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureManager.cpp">
+    <ClCompile Include="source\TextureManager.cpp">
       <Filter>Source Files\Core\Texture</Filter>
     </ClCompile>
-    <ClCompile Include="TileMap.cpp">
+    <ClCompile Include="source\TileMap.cpp">
       <Filter>Source Files\Core\Map</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="source\Player.cpp">
       <Filter>Source Files\Core\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="Debug.cpp">
-      <Filter>Source Files\Core\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="MapManager.cpp">
-      <Filter>Source Files\Core\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="MNEngine.cpp">
+    <ClCompile Include="source\MNEngine.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files\Core\Camera</Filter>
+    <ClCompile Include="source\MapManager.cpp">
+      <Filter>Source Files\Core\Map</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="source\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Trajectory.cpp">
+    <ClCompile Include="source\EntityManager.cpp">
       <Filter>Source Files\Core\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Entity.cpp">
+      <Filter>Source Files\Core\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Debug.cpp">
+      <Filter>Source Files\Core\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Camera.cpp">
+      <Filter>Source Files\Core\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AnimationManager.cpp">
+      <Filter>Source Files\Core\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Animation.cpp">
+      <Filter>Source Files\Core\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Tile.cpp">
+      <Filter>Source Files\Core\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="source\MNEngine.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.h">
+    <ClInclude Include="header\Animation.h">
       <Filter>Header Files\Core\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationManager.h">
+    <ClInclude Include="header\AnimationManager.h">
       <Filter>Header Files\Core\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Header Files\Core\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="EntityManager.h">
-      <Filter>Header Files\Core\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Namespace.h">
-      <Filter>Header Files\Core\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureData.h">
-      <Filter>Header Files\Core\Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Header Files\Core\Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files\Core\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimType.h">
-      <Filter>Header Files\Core\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="Debug.h">
-      <Filter>Header Files\Core\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="MapManager.h">
-      <Filter>Header Files\Core\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="MNEngine.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
+    <ClInclude Include="header\Camera.h">
       <Filter>Header Files\Core\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="TileMap.h">
+    <ClInclude Include="header\Debug.h">
+      <Filter>Header Files\Core\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="header\Entity.h">
+      <Filter>Header Files\Core\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="header\MapManager.h">
+      <Filter>Header Files\Core\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="header\MNEngine.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="header\Namespace.h">
+      <Filter>Header Files\Core\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="header\TextureManager.h">
+      <Filter>Header Files\Core\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="header\TextureData.h">
+      <Filter>Header Files\Core\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="header\TileMap.h">
       <Filter>Header Files\Core\Map\Tile</Filter>
     </ClInclude>
-    <ClInclude Include="Trajectory.h">
+    <ClInclude Include="header\Trajectory.h">
       <Filter>Header Files\Core\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="header\Player.h">
+      <Filter>Header Files\Core\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="header\EntityType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="header\TileType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="header\AnimationType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="header\AnimType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="header\EntityManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Header Files\Core\Map\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="header\Tile.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="maptest.txt~" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bridgetile.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="target.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="testen.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="testtex.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="tileset1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="maptest.txt" />
+    <Text Include="tiledata.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="INFO56_0.ttf" />
   </ItemGroup>
 </Project>

@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>G:\Libs\SFML-2.4.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\Libs\SFML-2.4.0\include;D:\PROGRAMMING\VS\2016\sfml-game1.1\sfml-game1.1\res;D:\PROGRAMMING\VS\2016\sfml-game1.1\sfml-game1.1\source;D:\PROGRAMMING\VS\2016\sfml-game1.1\sfml-game1.1\header;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -152,39 +152,60 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="AnimationManager.cpp" />
-    <ClCompile Include="Debug.cpp" />
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="EntityManager.cpp" />
-    <ClCompile Include="MapManager.cpp" />
-    <ClCompile Include="MNEngine.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="TileMap.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="Trajectory.cpp" />
+    <ClCompile Include="source\Animation.cpp" />
+    <ClCompile Include="source\AnimationManager.cpp" />
+    <ClCompile Include="source\Debug.cpp" />
+    <ClCompile Include="source\Entity.cpp" />
+    <ClCompile Include="source\EntityManager.cpp" />
+    <ClCompile Include="source\MapManager.cpp" />
+    <ClCompile Include="source\MNEngine.cpp" />
+    <ClCompile Include="source\Player.cpp" />
+    <ClCompile Include="source\Tile.cpp" />
+    <ClCompile Include="source\TileMap.cpp" />
+    <ClCompile Include="source\Camera.cpp" />
+    <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\TextureManager.cpp" />
+    <ClCompile Include="source\Trajectory.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="AnimationManager.h" />
-    <ClInclude Include="Debug.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="EntityManager.h" />
-    <ClInclude Include="AnimType.h" />
-    <ClInclude Include="MapManager.h" />
-    <ClInclude Include="MNEngine.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="TileMap.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Namespace.h" />
-    <ClInclude Include="TextureData.h" />
-    <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="Trajectory.h" />
+    <ClInclude Include="header\Animation.h" />
+    <ClInclude Include="header\AnimationManager.h" />
+    <ClInclude Include="header\AnimationType.h" />
+    <ClInclude Include="header\AnimType.h" />
+    <ClInclude Include="header\Debug.h" />
+    <ClInclude Include="header\Entity.h" />
+    <ClInclude Include="header\EntityManager.h" />
+    <ClInclude Include="header\EntityType.h" />
+    <ClInclude Include="header\MapManager.h" />
+    <ClInclude Include="header\MNEngine.h" />
+    <ClInclude Include="header\Player.h" />
+    <ClInclude Include="header\Tile.h" />
+    <ClInclude Include="header\TileMap.h" />
+    <ClInclude Include="header\Camera.h" />
+    <ClInclude Include="header\Namespace.h" />
+    <ClInclude Include="header\TextureData.h" />
+    <ClInclude Include="header\TextureManager.h" />
+    <ClInclude Include="header\TileType.h" />
+    <ClInclude Include="header\Trajectory.h" />
+    <ClInclude Include="Tile.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="maptest.txt~" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bridgetile.png" />
+    <Image Include="target.png" />
+    <Image Include="testen.png" />
+    <Image Include="testtex.png" />
+    <Image Include="tileset1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="INFO56_0.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="maptest.txt" />
+    <Text Include="tiledata.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
@@ -196,4 +217,8 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\boost.1.65.1.0\build\native\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.65.1.0\build\native\boost.targets'))" />
   </Target>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.1</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
 </Project>
