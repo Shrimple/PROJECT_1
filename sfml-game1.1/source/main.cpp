@@ -23,7 +23,8 @@ void main() {
 	MNE.spawnEntity("testen.png", 160, 120);
 	MNE.spawnEntity("testen.png", 180, 140);
 	
-	//penis123
+	//This is narnia
+	//coolSotrtBurh
 
 	Debug::printEntVec(MNE.EM.getVec());
 
