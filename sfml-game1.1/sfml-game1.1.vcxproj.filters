@@ -81,9 +81,6 @@
     <ClCompile Include="source\MapManager.cpp">
       <Filter>Source Files\Core\Map</Filter>
     </ClCompile>
-    <ClCompile Include="source\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\EntityManager.cpp">
       <Filter>Source Files\Core\Entity</Filter>
     </ClCompile>
@@ -107,6 +104,9 @@
     </ClCompile>
     <ClCompile Include="source\MNEngine.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="source\main.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -149,26 +149,23 @@
     <ClInclude Include="header\Player.h">
       <Filter>Header Files\Core\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="header\EntityType.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="header\TileType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="header\AnimationType.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Core\Animation</Filter>
     </ClInclude>
     <ClInclude Include="header\AnimType.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Core\Animation</Filter>
     </ClInclude>
     <ClInclude Include="header\EntityManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Core\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>Header Files\Core\Map\Tile</Filter>
+    <ClInclude Include="header\EntityType.h">
+      <Filter>Header Files\Core\Entity</Filter>
     </ClInclude>
     <ClInclude Include="header\Tile.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Core\Map\Tile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
