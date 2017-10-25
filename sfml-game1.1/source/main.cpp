@@ -22,9 +22,8 @@ void main() {
 	MNE.spawnEntity("testen.png", 140, 110);
 	MNE.spawnEntity("testen.png", 160, 120);
 	MNE.spawnEntity("testen.png", 180, 140);
-
-
-	//TESTING SOMETHIng really AMAZING.
+	
+	//my mom is the best
 
 	Debug::printEntVec(MNE.EM.getVec());
 
