@@ -2,6 +2,8 @@
 #include "Debug.h"
 #include "boost\shared_ptr.hpp"
 
+Console MNEngine::console;
+
 bool MNEngine::init(){
 	std::cout << "Engine init @ " << boost::addressof(*this) << "." << std::endl;
 	TM.init(this);
@@ -9,6 +11,7 @@ bool MNEngine::init(){
 	MM.init(this);
 	AM.init(this);
 	Cam.init(this);
+	ImGui::SFML::Init(*Cam.window);
 	return true;
 }
 
@@ -21,7 +24,6 @@ void MNEngine::loadTestTextures(){
 
 void MNEngine::render(){
 	Cam.window->clear();
-
 	Cam.window->draw(*MM.getMap());
 
 	if (EM.getVec().size() >= 1) {
@@ -34,6 +36,7 @@ void MNEngine::render(){
 
 	Debug::updateOSD(this, MM.getMap());
 
+	ImGui::SFML::Render(*Cam.window);
 	Cam.window->display();
 }
 
@@ -41,18 +44,24 @@ void MNEngine::pollEvent(){
 	sf::Event e;
 
 	while (Cam.window->pollEvent(e)) {
+		ImGui::SFML::ProcessEvent(e);
 
 		if (e.type == sf::Event::Closed)
 			Cam.window->close();
 
 		if (e.type == sf::Event::KeyPressed) {
-			EM.player->pollMoveE(e, MM.getMap());
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::F2))
+				Debug::setState(!Debug::isActive());
+
+				EM.player->pollMoveE(e, MM.getMap());
 		}
 
 		if (e.type == sf::Event::MouseButtonPressed) {
 			sf::Vector2f mousePosGame = sf::Vector2f(Cam.getMousePos().x*(Cam.camera->getSize().x/Cam.window->getSize().y), Cam.getMousePos().x*(Cam.camera->getSize().y / Cam.window->getSize().y));
-			std::cout << "mouse x:" << mousePosGame.x << "mouse y:" << mousePosGame.y << std::endl;
 			EM.player->setTrajectory();
+
+			if (console.mouseDebug)
+				console.AddLog("Mouse -> X: '%.0f' Y: '%.0f' ", mousePosGame.x, mousePosGame.y);
 		}
 	}
 }
@@ -70,10 +79,12 @@ void MNEngine::spawnEntity(char * fileName, int xoff, int yoff){
 }
 
 void MNEngine::update(){
+	ImGui::SFML::Update(*Cam.window, deltaClock.restart());
 	AM.incCtr();
 	AM.incAnimFrames();
 	EM.updateEnts(MM.getMap());
 	moveScreen();
+	Debug::draw();
 }
 
 void MNEngine::onScreenDebug(bool)

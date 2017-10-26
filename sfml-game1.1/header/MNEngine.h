@@ -7,12 +7,16 @@
 #include "MapManager.h"
 #include "TextureManager.h"
 #include "SFML\Window.hpp"
+#include "imgui.h"
+#include "imgui-SFML.h"
+#include "Console.h"
 
 using namespace csp;
 
 class MNEngine
 {
 private:
+	sf::Clock deltaClock;
 public:
 	const int TILE_SIZE = 20;
 	TextureManager TM;
@@ -20,6 +24,7 @@ public:
 	AnimationManager AM;
 	MapManager MM;
 	Camera Cam;
+	static Console console;
 
 	MNEngine();
 	~MNEngine();

@@ -10,8 +10,11 @@ class MNEngine;
 class Debug{
 private:
 	static bool os_debug;
-	static sf::Text cur, right, top, left, bot, topRight, topLeft, botRight, botLeft, x, y, xV, yV;
-
+	static char tiles_1[32];
+	static char tiles_2[32];
+	static char tiles_3[32];
+	static char player_1[32];
+	static char player_2[32];
 public:
 	static void printPPos(MNEngine* const);
 	static void init();
@@ -19,6 +22,7 @@ public:
 	static void setState(bool);
 	static void updateOSD(MNEngine* const, TileMap *);
 	static void printEntVec(std::vector<boost::shared_ptr<Entity>>);
+	static void draw();
 	Debug();
 	~Debug();
 };
