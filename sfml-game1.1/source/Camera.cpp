@@ -40,8 +40,17 @@ void Camera::init(MNEngine* const ptr){
 	std::cout << "-Screen initialized" << std::endl;
 }
 
-sf::Vector2i Camera::getMousePos(){
-	return sf::Mouse::getPosition();
+sf::Vector2f Camera::getMousePos(){
+	sf::Vector2f winMax(window->getSize().x, window->getSize().y),
+				 camMax(camera->getCenter().x + camera->getSize().x / 2, camera->getCenter().y + camera->getSize().y / 2),
+				 camMin(camera->getCenter().x - camera->getSize().x / 2, camera->getCenter().y - camera->getSize().y / 2);
+				
+	
+	float percentX = sf::Mouse::getPosition(*window).x / winMax.x;
+	float percentY = sf::Mouse::getPosition(*window).y / winMax.y;
+
+	return sf::Vector2f(percentX * (camMax.x-camMin.x) + camMin.x,
+						percentY * (camMax.y-camMin.y) + camMin.y);
 }
 
 void Camera::moveCam2P(){

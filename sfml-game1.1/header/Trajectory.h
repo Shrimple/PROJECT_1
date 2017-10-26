@@ -9,7 +9,10 @@ class Trajectory
 private:
 	Entity* parent;
 	sf::Vector2f origin; //x1, y1
-	sf::Vector2i destination; //x2, y2
+	sf::Vector2f destination; //x2, y2
+	float m;
+	float x;
+	float b;
 	
 public:
 	//facing completely right
@@ -24,7 +27,7 @@ public:
 
 	void calculateYaw();
 	void calculateVelXY();
-	void setTarget(sf::Vector2i);
+	void setTarget(sf::Vector2f);
 	bool isComplete();
 };
 #endif

@@ -184,7 +184,7 @@ void Entity::setVelocity(float xVel, float yVel) {
 
 void Entity::setTrajectory(){
 	trajectory.complete = false;
-	trajectory.setTarget(sf::Mouse::getPosition(*enginePtr->Cam.window));
+	trajectory.setTarget(enginePtr->Cam.getMousePos());
 	trajectory.calculateVelXY();
 }
 

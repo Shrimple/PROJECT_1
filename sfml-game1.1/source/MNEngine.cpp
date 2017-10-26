@@ -50,7 +50,8 @@ void MNEngine::pollEvent(){
 		}
 
 		if (e.type == sf::Event::MouseButtonPressed) {
-			std::cout << "mouse x:" << Cam.getMousePos().x << "mouse y:" << Cam.getMousePos().y << std::endl;
+			sf::Vector2f mousePosGame = sf::Vector2f(Cam.getMousePos().x*(Cam.camera->getSize().x/Cam.window->getSize().y), Cam.getMousePos().x*(Cam.camera->getSize().y / Cam.window->getSize().y));
+			std::cout << "mouse x:" << mousePosGame.x << "mouse y:" << mousePosGame.y << std::endl;
 			EM.player->setTrajectory();
 		}
 	}
