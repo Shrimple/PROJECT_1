@@ -85,7 +85,6 @@ void Console::Draw(const char* title)
 		ImGui::EndPopup();
 	}
 
-
 	ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(4, 1)); //  spacing
 
 	//Copy Paste Option

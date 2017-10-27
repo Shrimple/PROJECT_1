@@ -36,7 +36,6 @@ void Player::pollMove() {
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-		std::cout << "spacebar" << std::endl;
 	}
 
 	//debug key

@@ -70,6 +70,27 @@
     <Filter Include="Header Files\Core\Khashan">
       <UniqueIdentifier>{64c5cb38-684f-4f13-be88-2baa8d166720}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Core\Khashan">
+      <UniqueIdentifier>{206ed4f9-2cce-422f-8381-a2dc3dd36f6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Items">
+      <UniqueIdentifier>{f7835766-e048-40b0-aa9f-8aa3f9b54045}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Items\Weapons">
+      <UniqueIdentifier>{5758319e-50de-4ef6-a199-45c41f3ff404}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Items\Armors">
+      <UniqueIdentifier>{3e397503-cd82-4dbc-8442-14b15970c07e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Items\Miscs">
+      <UniqueIdentifier>{e0cca28b-5ae3-426d-9107-fb516da68339}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Inventory">
+      <UniqueIdentifier>{2242211f-2399-4981-8535-c8793f27741d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Inventory">
+      <UniqueIdentifier>{92f4c642-ddc5-4de0-9131-5d4f690351c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Trajectory.cpp">
@@ -128,6 +149,12 @@
     </ClCompile>
     <ClCompile Include="source\Console.cpp">
       <Filter>Source Files\Core\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PlayerInventory.cpp">
+      <Filter>Source Files\Core\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Inventory.cpp">
+      <Filter>Source Files\Core\Inventory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -209,20 +236,32 @@
     <ClInclude Include="header\stb_truetype.h">
       <Filter>Header Files\Core\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="header\Item.h">
-      <Filter>Header Files\Core\Khashan</Filter>
-    </ClInclude>
-    <ClInclude Include="header\Inventory.h">
-      <Filter>Header Files\Core\Khashan</Filter>
-    </ClInclude>
-    <ClInclude Include="header\S_Sword.h">
-      <Filter>Header Files\Core\Khashan</Filter>
-    </ClInclude>
     <ClInclude Include="header\Console.h">
       <Filter>Header Files\Core\Utils</Filter>
     </ClInclude>
     <ClInclude Include="header\TileType.h">
       <Filter>Header Files\Core\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="header\Item.h">
+      <Filter>Header Files\Core\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="header\S_Sword.h">
+      <Filter>Header Files\Core\Items\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="header\Weapon.h">
+      <Filter>Header Files\Core\Items\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="header\Armor.h">
+      <Filter>Header Files\Core\Items\Armors</Filter>
+    </ClInclude>
+    <ClInclude Include="header\MiscItem.h">
+      <Filter>Header Files\Core\Items\Miscs</Filter>
+    </ClInclude>
+    <ClInclude Include="header\Inventory.h">
+      <Filter>Header Files\Core\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="header\PlayerInventory.h">
+      <Filter>Header Files\Core\Inventory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

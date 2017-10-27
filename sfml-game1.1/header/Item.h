@@ -1,17 +1,13 @@
 #pragma once
 #include <string>
 
-enum WeaponClass { DAGGER, SHORT_SWORD, LONG_SWORD, SHIELD, WAND, STAFF, BOW, CROSSBOW };
-
+enum ItemType {ARMOR, WEAPON, MISC};
 
 struct Item
 {
 	Item();
 	virtual ~Item();
-	unsigned int itemType;
-	unsigned int minDamage;
-	unsigned int maxDamage;
-	WeaponClass itemClass;
+	ItemType item_type;
 	unsigned int itemID;
 	int cost;
 	int value;
