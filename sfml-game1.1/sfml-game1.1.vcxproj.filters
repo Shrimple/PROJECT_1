@@ -61,6 +61,15 @@
     <Filter Include="Header Files\Core\Map\Tile">
       <UniqueIdentifier>{3dc0ea19-168c-475f-96e7-94aa48257276}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\ImGui">
+      <UniqueIdentifier>{c07d2765-c235-4c84-a4f4-715031e0d719}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\ImGui">
+      <UniqueIdentifier>{0fa6af1d-4497-47b9-9034-6117a7fc6908}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Khashan">
+      <UniqueIdentifier>{64c5cb38-684f-4f13-be88-2baa8d166720}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Trajectory.cpp">
@@ -107,6 +116,18 @@
     </ClCompile>
     <ClCompile Include="source\main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\imgui-SFML.cpp">
+      <Filter>Source Files\Core\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="source\imgui.cpp">
+      <Filter>Source Files\Core\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="source\imgui_draw.cpp">
+      <Filter>Source Files\Core\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Console.cpp">
+      <Filter>Source Files\Core\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +187,45 @@
     </ClInclude>
     <ClInclude Include="header\Tile.h">
       <Filter>Header Files\Core\Map\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="header\stb_truetype.h">
+      <Filter>Header Files\Core\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="header\imconfig.h">
+      <Filter>Header Files\Core\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="header\imconfig-SFML.h">
+      <Filter>Header Files\Core\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="header\imgui.h">
+      <Filter>Header Files\Core\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="header\imgui_internal.h">
+      <Filter>Header Files\Core\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="header\imgui-SFML.h">
+      <Filter>Header Files\Core\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="header\stb_rect_pack.h">
+      <Filter>Header Files\Core\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="header\stb_textedit.h">
+      <Filter>Header Files\Core\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="header\Console.h">
+      <Filter>Header Files\Core\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="header\Item.h">
+      <Filter>Header Files\Core\Khashan</Filter>
+    </ClInclude>
+    <ClInclude Include="header\Inventory.h">
+      <Filter>Header Files\Core\Khashan</Filter>
+    </ClInclude>
+    <ClInclude Include="header\S_Sword.h">
+      <Filter>Header Files\Core\Khashan</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

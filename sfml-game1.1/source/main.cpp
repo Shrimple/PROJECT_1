@@ -10,8 +10,6 @@ void main() {
 	MNE.init();
 	MNE.loadTestTextures();
 
-	Debug::setState(true);
-
 	//setup dev zone
 	if (!MNE.MM.loadMap("maptest.txt", "tileset1.png"))
 		std::cout << "map has failed to load." << std::endl;
@@ -34,6 +32,9 @@ void main() {
 		MNE.render();
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));;
 	}
+
+
+	ImGui::SFML::Shutdown();
 	return;
 }
 
