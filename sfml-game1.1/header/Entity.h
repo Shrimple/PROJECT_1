@@ -13,14 +13,15 @@ class Entity{
 protected:
 	MNEngine* enginePtr;
 	int health = 100, speed = 2, tex, yaw, id;
-	//0-7 diagonals count
+	//0-7 diagonals count(old)
 	sf::Vector2f pos, velocity;
 	sf::Sprite sprite;
 	csp::EntityType type;
 	Animation animation;
 	//linear trajectory
 	Trajectory trajectory;
-	bool isColliding(TileMap *);
+	//useful states (states finish with _s)
+	bool visible_s = true, colliding_s = false;
 
 public:
 	bool isDead = false;
@@ -30,7 +31,7 @@ public:
 	Entity(MNEngine* const, int textureVectorIndex, csp::EntityType type, float xOff, float yOff, int);
 	virtual ~Entity();
 
-	void update(TileMap *);
+	void update();
 	void kill();
 	void setAnim(Animation);
 	void setDirection(int);
@@ -39,6 +40,7 @@ public:
 	void setTexture(int);
 	void setVelocity(float, float);
 	void setTrajectory();
+	void setVisibility(bool);
 
 	int getTexIndex() { return tex; };
 	int getSpeed() { return speed; };
@@ -46,7 +48,10 @@ public:
 	float getYaw() { return yaw; };
 	float getVX() { return velocity.x; };
 	float getVY() { return velocity.y; };
+	bool isVisible() { return visible_s; };
+	bool isColliding(TileMap *);
 	MNEngine* getEnginePtr() {return enginePtr; };
+
 
 	sf::Sprite getSprite() { return sprite; };
 	sf::Vector2f getPos() { return pos; };

@@ -15,11 +15,13 @@ private:
 	std::vector<Entity*> deadEntities;
 	MNEngine* enginePtr;
 	int uuid;
+	int TEMP_CTR;
 public:
 	Player * player;
 
 	EntityManager();
 	~EntityManager();
+
 	std::vector<boost::shared_ptr<Entity>> getVec();
 	Entity &getEnt(int i);
 	bool init(MNEngine* const);

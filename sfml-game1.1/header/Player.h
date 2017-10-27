@@ -11,6 +11,6 @@ private:
 public:
 	Player(MNEngine* const e, int id) :Entity(e, 1, csp::EntityType::PLAYER, 220, 220, id) {};
 	~Player();
-	void pollMoveE(sf::Event &e, TileMap * map);
+	void pollMove();
 };
 #endif

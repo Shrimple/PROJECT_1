@@ -6,28 +6,28 @@
 #include "MNEngine.h"
 
 Animation::Animation(MNEngine* const ptr, const Animation &a){
-	this->enginePtr = ptr;
-	this->currentFrame = a.currentFrame;
-	this->frames = a.frames;
+	parent = &ptr->AM;
+	currentFrame = a.currentFrame;
+	frames = a.frames;
 }
 
 
-Animation::Animation(MNEngine* const ptr, int frames){
-	this->enginePtr = ptr;
-	this->currentFrame = 0;
-	this->frames = frames;
+Animation::Animation(MNEngine* const ptr, int framez){
+	parent = &ptr->AM;
+	currentFrame = 0;
+	frames = framez;
 }
 
 Animation::Animation(MNEngine* const ptr){
-	this->enginePtr = ptr;
-	this->currentFrame = 0;
-	this->frames = 0;
+	parent = &ptr->AM;
+	currentFrame = 0;
+	frames = 0;
 }
 
 Animation::Animation() {
-	this->enginePtr = NULL;
-	this->currentFrame = 0;
-	this->frames = 0;
+	parent = NULL;
+	currentFrame = 0;
+	frames = 0;
 }
 
 Animation::~Animation(){
@@ -50,9 +50,9 @@ void Animation::decFrame(){
 }
 
 sf::IntRect Animation::getRect(int texIndex){
-	sf::Texture tex = enginePtr->TM.get(texIndex);
-	int x = (enginePtr->TILE_SIZE*this->currentFrame) % tex.getSize().x;
+	sf::Texture tex = parent->enginePtr->TM.get(texIndex);
+	int x = (parent->enginePtr->TILE_SIZE*this->currentFrame) % tex.getSize().x;
 	int y = 0;
-	return sf::IntRect(x, y, enginePtr->TILE_SIZE, enginePtr->TILE_SIZE);
+	return sf::IntRect(x, y, parent->enginePtr->TILE_SIZE, parent->enginePtr->TILE_SIZE);
 }
 

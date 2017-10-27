@@ -5,12 +5,20 @@
 #include "MNEngine.h"
 
 
+void Trajectory::destroyTarget(){
+	target->kill();
+	complete = true;
+	hasTarget = false;
+}
+
 void Trajectory::calculateYaw(){
 }
 
 void Trajectory::destroy(){
 	complete = true;
+	target->kill();
 	destination = origin;
+	hasTarget = false;
 }
 
 void Trajectory::calculateVelXY(){
@@ -41,7 +49,7 @@ void Trajectory::calculateVelXY(){
 			parent->setVelocity(newVel.x, newVel.y);
 
 			if ((abs(destination.x - origin.x) < 1) && (abs(destination.y - origin.y) < 1)) {
-				complete = true;
+				destroyTarget();
 				parent->setVelocity(0, 0);
 			}
 
@@ -49,13 +57,12 @@ void Trajectory::calculateVelXY(){
 		}
 
 		if (stuck == 5) {
-			stuck = 0;
-			target->kill();
-			complete = true;
+			destroyTarget();
+			stuck = 0;	
 		}
 
 		if ((parent->getVelVector().x == 0) && (parent->getVelVector().y == 0)) {
-			target->kill();
+			destroyTarget();
 		}
 	}
 
@@ -64,19 +71,18 @@ void Trajectory::calculateVelXY(){
 
 void Trajectory::setTarget(sf::Vector2f dest){
 	destination = dest;
-	parent->getEnginePtr()->EM.newEntity(4, dest.x, dest.y);
-	if (target != nullptr)
-		target->kill();
-
-	target = parent->getEnginePtr()->EM.getVec().back();
-}
-
-bool Trajectory::isComplete(){
-	return complete;
+	if (!hasTarget) {
+		parent->getEnginePtr()->EM.newEntity(4, dest.x, dest.y);
+		target = parent->getEnginePtr()->EM.getVec().back();
+		hasTarget = true;
+	} else {
+		target->setEntPos(destination.x, destination.y);
+	}
 }
 
 Trajectory::Trajectory(Entity * const parentEnt){
 	complete = true;
+	hasTarget = false;
 	lastPos = parentEnt->getPos();
 	parent = parentEnt;
 	origin = parentEnt->getPos();
@@ -86,6 +92,7 @@ Trajectory::Trajectory(Entity * const parentEnt){
 
 Trajectory::Trajectory(){
 	complete = true;
+	hasTarget = false;
 	parent = NULL;
 	lastPos = { 0,0 };
 	origin = { 0,0 };
@@ -93,6 +100,5 @@ Trajectory::Trajectory(){
 }
 
 
-Trajectory::~Trajectory()
-{
+Trajectory::~Trajectory(){
 }

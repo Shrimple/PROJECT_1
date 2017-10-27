@@ -6,7 +6,9 @@
 #include "Player.h"
 
 class MNEngine;
+
 class AnimationManager{
+	friend class Animation;
 private:
 	MNEngine* enginePtr;
 

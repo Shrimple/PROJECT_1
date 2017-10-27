@@ -11,10 +11,12 @@ bool EntityManager::init(MNEngine* const ptr){
 
 void EntityManager::updateEnts(TileMap * map){
 	for (boost::shared_ptr<Entity> e : ent_ptrVec)
-		e->update(map);
+		e->update();
 
-	if(player != NULL)
-		player->update(map);
+	if (player != NULL) {
+		player->pollMove();
+		player->update();
+	}
 }
 
 std::vector<boost::shared_ptr<Entity>> EntityManager::getVec(){

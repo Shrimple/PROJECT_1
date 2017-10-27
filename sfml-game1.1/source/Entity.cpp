@@ -45,10 +45,10 @@ Entity::Entity(MNEngine* const ptr, int textureVectorIndex, EntityType pType, fl
 	animation = Animation(ptr, tex);
 }
 
-void Entity::update(TileMap * map) {
+void Entity::update() {
 	//limit velocity to speed in X
 	//if there is no active trajectory enable wasd movement
-	if (trajectory.isComplete()) {
+	if (trajectory.complete) {
 		if ((velocity.x > speed) || (velocity.x < -speed)) {
 			if (velocity.x > 0)
 				velocity.x = speed;
@@ -67,7 +67,7 @@ void Entity::update(TileMap * map) {
 		trajectory.calculateVelXY();
 	}
 
-	isColliding(map);
+	isColliding(enginePtr->MM.getMap());
 
 	if ((health <= 0)&&(!isDead))
 		kill();
@@ -161,6 +161,8 @@ bool Entity::isColliding(TileMap *map) {
 		}
 	}
 
+	(collidesX || collidesY) ? colliding_s = true : colliding_s = false;
+
 	return (collidesX || collidesY) ? true : false;
 }
 
@@ -198,10 +200,14 @@ void Entity::setTrajectory(){
 	trajectory.calculateVelXY();
 }
 
+void Entity::setVisibility(bool)
+{
+}
+
 
 
 Entity::~Entity() {
-	if(!trajectory.isComplete())
+	if(!trajectory.complete)
 		trajectory.destroy();
 
 

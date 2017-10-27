@@ -1,17 +1,17 @@
-#pragma once
 #ifndef ANIMATION_H
 #define ANIMATION_H
 #include <SFML/Graphics.hpp>
 #include "AnimType.h"
 
 class MNEngine;
+class AnimationManager;
 class Animation{
 private:
 	bool loop;
 	int frames;
 	int currentFrame;
 	AnimType type;
-	MNEngine* enginePtr;
+	AnimationManager* parent;
 
 public:
 	Animation(MNEngine* const, const Animation &);
