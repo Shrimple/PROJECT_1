@@ -25,15 +25,25 @@ void Trajectory::calculateVelXY(){
 
 		if ((origin.x != destination.x) || (origin.y != destination.y)) {
 
-			std::cout << "trajectory : originvec=(" << origin.x << ", " << origin.y << ")" << std::endl;
-			std::cout << "           : destvec=(" << destination.x << ", " << destination.y << ") yaw=" << yaw << std::endl;
 			newVel = sf::Vector2f(destination.x, destination.y) - (origin);
-			//newVel = {newVel.x-(newVel.x-parent->getSpeed()),newVel.y - (newVel.y - parent->getSpeed()) };
-			std::cout << "           : newVel=(" << newVel.x << ", " << newVel.y << ")" << std::endl;
+
+			if (newVel.x < -2){ newVel.x = -2;	}
+
+			if (newVel.x > 2) {newVel.x = 2;	}
+
+			if (newVel.y < -2){newVel.y = -2;	}
+
+			if (newVel.y > 2) {newVel.y = 2;	}
+
+				//std::cout << "trajectory : originvec=(" << origin.x << ", " << origin.y << ")" << std::endl;
+				//std::cout << "           : destvec=(" << destination.x << ", " << destination.y << ") yaw=" << yaw << std::endl;
+				//std::cout << "           : newVel=(" << newVel.x << ", " << newVel.y << ")" << std::endl;
+
 			parent->setVelocity(newVel.x, newVel.y);
 
-			if ((origin.x == destination.x) && (origin.y == destination.y)) {
+			if ((abs(destination.x - origin.x) < 1) && (abs(destination.y - origin.y) < 1)) {
 				complete = true;
+				parent->setVelocity(0, 0);
 			}
 
 			//complete = true;
@@ -48,7 +58,7 @@ void Trajectory::calculateVelXY(){
 	return;
 }
 
-void Trajectory::setTarget(sf::Vector2i dest){
+void Trajectory::setTarget(sf::Vector2f dest){
 	destination = dest;
 }
 
