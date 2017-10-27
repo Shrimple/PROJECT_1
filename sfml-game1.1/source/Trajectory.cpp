@@ -2,9 +2,15 @@
 #include "Entity.h"
 #include "SFML\Graphics.hpp"
 #include "SFML\Window.hpp"
+#include "MNEngine.h"
 
 
 void Trajectory::calculateYaw(){
+}
+
+void Trajectory::destroy(){
+	complete = true;
+	destination = origin;
 }
 
 void Trajectory::calculateVelXY(){
@@ -14,14 +20,11 @@ void Trajectory::calculateVelXY(){
 	if (!complete) {
 		lastPos = origin;
 		origin = parent->getPos();
+
 		if (origin == lastPos)
 			stuck++;
-		calculateYaw();
-	/**float m = (destination.y - origin.y) / (destination.x - origin.x),
-		  b = origin.y,
-		  x = ((parent->getPos().y + ((destination.y - origin.y) / parent->getSpeed())) - b) / m,
-		  y = m*x + b;
-		  **/
+
+		//calculateYaw();
 
 		if ((origin.x != destination.x) || (origin.y != destination.y)) {
 
@@ -35,10 +38,6 @@ void Trajectory::calculateVelXY(){
 
 			if (newVel.y > 2) {newVel.y = 2;	}
 
-				//std::cout << "trajectory : originvec=(" << origin.x << ", " << origin.y << ")" << std::endl;
-				//std::cout << "           : destvec=(" << destination.x << ", " << destination.y << ") yaw=" << yaw << std::endl;
-				//std::cout << "           : newVel=(" << newVel.x << ", " << newVel.y << ")" << std::endl;
-
 			parent->setVelocity(newVel.x, newVel.y);
 
 			if ((abs(destination.x - origin.x) < 1) && (abs(destination.y - origin.y) < 1)) {
@@ -46,12 +45,16 @@ void Trajectory::calculateVelXY(){
 				parent->setVelocity(0, 0);
 			}
 
-			//complete = true;
+			stuck = 0;
 		}
 
 		if (stuck == 5) {
 			stuck = 0;
 			complete = true;
+		}
+
+		if ((parent->getVelVector().x == 0) && (parent->getVelVector().y == 0)) {
+			target->kill();
 		}
 	}
 
@@ -60,6 +63,11 @@ void Trajectory::calculateVelXY(){
 
 void Trajectory::setTarget(sf::Vector2f dest){
 	destination = dest;
+	parent->getEnginePtr()->EM.newEntity(4, dest.x, dest.y);
+	if (target != nullptr)
+		target->kill();
+
+	target = parent->getEnginePtr()->EM.getVec().back();
 }
 
 bool Trajectory::isComplete(){

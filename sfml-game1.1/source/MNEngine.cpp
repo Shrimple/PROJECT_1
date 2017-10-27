@@ -13,10 +13,11 @@ bool MNEngine::init(){
 }
 
 void MNEngine::loadTestTextures(){
-		TM.loadTex("tileset1.png");
-		TM.loadTex("testtex.png");
-		TM.loadTex("testen.png");
-		TM.loadTex("bridgetile.png");
+	TM.loadTex("tileset1.png");
+	TM.loadTex("testtex.png");
+	TM.loadTex("testen.png");
+	TM.loadTex("bridgetile.png");
+	TM.loadTex("target.png");
 }
 
 void MNEngine::render(){
@@ -50,8 +51,6 @@ void MNEngine::pollEvent(){
 		}
 
 		if (e.type == sf::Event::MouseButtonPressed) {
-			sf::Vector2f mousePosGame = sf::Vector2f(Cam.getMousePos().x*(Cam.camera->getSize().x/Cam.window->getSize().y), Cam.getMousePos().x*(Cam.camera->getSize().y / Cam.window->getSize().y));
-			std::cout << "mouse x:" << mousePosGame.x << "mouse y:" << mousePosGame.y << std::endl;
 			EM.player->setTrajectory();
 		}
 	}
@@ -72,6 +71,7 @@ void MNEngine::spawnEntity(char * fileName, int xoff, int yoff){
 void MNEngine::update(){
 	AM.incCtr();
 	AM.incAnimFrames();
+	EM.cleanVector();
 	EM.updateEnts(MM.getMap());
 	moveScreen();
 }

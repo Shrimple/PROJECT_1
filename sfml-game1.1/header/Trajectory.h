@@ -2,12 +2,14 @@
 #ifndef TRAJECTORY_H
 #define TRAJECTORY_H
 #include "SFML\Graphics.hpp"
+#include "boost\shared_ptr.hpp"
 
 class Entity;
 class Trajectory
 {
 private:
 	Entity* parent;
+	boost::shared_ptr<Entity> target;
 	sf::Vector2f origin; //x1, y1
 	sf::Vector2f destination; //x2, y2
 	float m;
@@ -26,6 +28,7 @@ public:
 	~Trajectory();
 
 	void calculateYaw();
+	void destroy();
 	void calculateVelXY();
 	void setTarget(sf::Vector2f);
 	bool isComplete();
