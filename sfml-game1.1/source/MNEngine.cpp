@@ -20,6 +20,7 @@ void MNEngine::loadTestTextures(){
 		TM.loadTex("testtex.png");
 		TM.loadTex("testen.png");
 		TM.loadTex("bridgetile.png");
+		TM.loadTex("target.png");
 }
 
 void MNEngine::render(){
@@ -55,23 +56,10 @@ void MNEngine::pollEvent(){
 			{
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::F2))
 					Debug::setState(!Debug::isActive());
-
-				EM.player->pollMoveE(e, MM.getMap());
+				//EM.player->pollMoveE(MM.getMap());
 			}
 		}
 
-		if (e.type == sf::Event::MouseButtonPressed) {
-
-			//If mouse is  in the debug menu - > cancel event for the game.
-			if (!ImGui::GetIO().WantCaptureMouse)
-			{
-			sf::Vector2f mousePosGame = sf::Vector2f(Cam.getMousePos().x*(Cam.camera->getSize().x/Cam.window->getSize().y), Cam.getMousePos().x*(Cam.camera->getSize().y / Cam.window->getSize().y));
-			EM.player->setTrajectory();
-
-			if (console.mouseDebug)
-				console.AddLog("Mouse -> X: '%.0f' Y: '%.0f' ", mousePosGame.x, mousePosGame.y);
-			}
-		}
 	}
 }
 
@@ -92,6 +80,7 @@ void MNEngine::update(){
 	AM.incCtr();
 	AM.incAnimFrames();
 	EM.updateEnts(MM.getMap());
+	EM.cleanVector();
 	moveScreen();
 	Debug::draw();
 }

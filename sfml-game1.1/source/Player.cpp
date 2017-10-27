@@ -12,7 +12,7 @@ using namespace csp;
 Player::~Player() {
 }
 
-void Player::pollMoveE(sf::Event &e, TileMap * map) {
+void Player::pollMove() {
 	//sprite origin is now middle
 	yaw = 0;
 
@@ -20,7 +20,8 @@ void Player::pollMoveE(sf::Event &e, TileMap * map) {
 		yaw += 0;
 		velocity.x += (speed - velocity.x);
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 		yaw += 2;
 		velocity.x -= (speed + velocity.x);
 	}
@@ -29,7 +30,7 @@ void Player::pollMoveE(sf::Event &e, TileMap * map) {
 		yaw += 1;
 		velocity.y -= (speed + velocity.y);
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
 		yaw += 3;
 		velocity.y += (speed - velocity.y);
 	}
@@ -46,6 +47,19 @@ void Player::pollMoveE(sf::Event &e, TileMap * map) {
 		}
 		else {
 			Debug::setState(true);
+		}
+	}
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+
+		//If mouse is  in the debug menu - > cancel event for the game.
+		if (!ImGui::GetIO().WantCaptureMouse)
+		{
+			sf::Vector2f mousePosGame = sf::Vector2f(enginePtr->Cam.getMousePos().x*(enginePtr->Cam.camera->getSize().x / enginePtr->Cam.window->getSize().y), enginePtr->Cam.getMousePos().x*(enginePtr->Cam.camera->getSize().y / enginePtr->Cam.window->getSize().y));
+			enginePtr->EM.player->setTrajectory();
+
+			if (enginePtr->console.mouseDebug)
+				enginePtr->console.AddLog("Mouse -> X: '%.0f' Y: '%.0f' ", mousePosGame.x, mousePosGame.y);
 		}
 	}
 

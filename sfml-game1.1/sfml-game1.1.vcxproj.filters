@@ -117,13 +117,13 @@
     <ClCompile Include="source\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\imgui-SFML.cpp">
-      <Filter>Source Files\Core\ImGui</Filter>
-    </ClCompile>
     <ClCompile Include="source\imgui.cpp">
       <Filter>Source Files\Core\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="source\imgui_draw.cpp">
+      <Filter>Source Files\Core\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="source\imgui-SFML.cpp">
       <Filter>Source Files\Core\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="source\Console.cpp">
@@ -170,9 +170,6 @@
     <ClInclude Include="header\Player.h">
       <Filter>Header Files\Core\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="header\TileType.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="header\AnimationType.h">
       <Filter>Header Files\Core\Animation</Filter>
     </ClInclude>
@@ -188,10 +185,7 @@
     <ClInclude Include="header\Tile.h">
       <Filter>Header Files\Core\Map\Tile</Filter>
     </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="header\stb_truetype.h">
+    <ClInclude Include="header\imgui-SFML.h">
       <Filter>Header Files\Core\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="header\imconfig.h">
@@ -206,17 +200,14 @@
     <ClInclude Include="header\imgui_internal.h">
       <Filter>Header Files\Core\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="header\imgui-SFML.h">
-      <Filter>Header Files\Core\ImGui</Filter>
-    </ClInclude>
     <ClInclude Include="header\stb_rect_pack.h">
       <Filter>Header Files\Core\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="header\stb_textedit.h">
       <Filter>Header Files\Core\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="header\Console.h">
-      <Filter>Header Files\Core\Utils</Filter>
+    <ClInclude Include="header\stb_truetype.h">
+      <Filter>Header Files\Core\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="header\Item.h">
       <Filter>Header Files\Core\Khashan</Filter>
@@ -226,6 +217,12 @@
     </ClInclude>
     <ClInclude Include="header\S_Sword.h">
       <Filter>Header Files\Core\Khashan</Filter>
+    </ClInclude>
+    <ClInclude Include="header\Console.h">
+      <Filter>Header Files\Core\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="header\TileType.h">
+      <Filter>Header Files\Core\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -5,69 +5,74 @@
 #include "MNEngine.h"
 using namespace csp;
 
-Entity::Entity(MNEngine* const ptr){
-	printf("new entity with INIT settings.");
+Entity::Entity(MNEngine* const ptr, int uid){
+	id = uid;
 	trajectory = Trajectory(this);
 	enginePtr = ptr;
 	tex = 0;
 	type = EntityType::AI_ENEMY;
-	pos.x = 0, pos.y = 0;
+	pos.x = (enginePtr->TILE_SIZE / 2), pos.y = (enginePtr->TILE_SIZE / 2);
 	sprite.setTexture(enginePtr->TM.get(tex));
-	sprite.setPosition(pos.x, pos.y);
+	sprite.setPosition(pos.x - (enginePtr->TILE_SIZE / 2), pos.y - (enginePtr->TILE_SIZE / 2));
 	yaw = 0;
 	animation = Animation(ptr, tex);
 }
 
-Entity::Entity(MNEngine* const ptr,int textureVectorIndex, EntityType pType) {
-	printf("new entity with textureId #%d\n", textureVectorIndex);
+Entity::Entity(MNEngine* const ptr,int textureVectorIndex, EntityType pType, int uid) {
+	id = uid;
 	trajectory = Trajectory(this);
 	enginePtr = ptr;
 	tex = textureVectorIndex;
 	type = pType;
-	pos.x = 0, pos.y = 0;
+	pos.x = (enginePtr->TILE_SIZE / 2), pos.y = (enginePtr->TILE_SIZE / 2);
 	sprite.setTexture(enginePtr->TM.get(tex));
+	sprite.setPosition(pos.x - (enginePtr->TILE_SIZE / 2), pos.y -(enginePtr->TILE_SIZE / 2));
 	yaw = 0;
 	animation = Animation(ptr, tex);
 }
 
-Entity::Entity(MNEngine* const ptr, int textureVectorIndex, EntityType pType, float xOff, float yOff) {
-	printf("new entity with textureId #%d\n @offset x=%d, y=%d\n", textureVectorIndex, xOff, yOff);
+Entity::Entity(MNEngine* const ptr, int textureVectorIndex, EntityType pType, float xOff, float yOff, int uid) {
+	id = uid;
 	trajectory = Trajectory(this);
 	enginePtr = ptr;
 	tex = textureVectorIndex;
 	type = pType;
-	pos.x = xOff + (enginePtr->TILE_SIZE / 2);
-	pos.y = yOff + (enginePtr->TILE_SIZE / 2);
+	pos.x = xOff;
+	pos.y = yOff;
 	sprite.setTexture(enginePtr->TM.get(tex));
-	sprite.setPosition(xOff, yOff);
+	sprite.setPosition(xOff - (enginePtr->TILE_SIZE / 2), yOff - (enginePtr->TILE_SIZE / 2));
 	yaw = 0;
 	animation = Animation(ptr, tex);
 }
 
-void Entity::update(TileMap * map) {
+void Entity::update() {
 	//limit velocity to speed in X
+	//if there is no active trajectory enable wasd movement
+	if (trajectory.complete) {
+		if ((velocity.x > speed) || (velocity.x < -speed)) {
+			if (velocity.x > 0)
+				velocity.x = speed;
+			else
+				velocity.x = -speed;
+		}
 
-	if ((velocity.x > speed) || (velocity.x < -speed)) {
-		if (velocity.x > 0)
-			velocity.x = speed;
-		else
-			velocity.x = -speed;
+		//limit velocity to speed in Y
+		if ((velocity.y > speed) || (velocity.y < -speed)) {
+			if (velocity.y > 0)
+				velocity.y = speed;
+			else
+				velocity.y = -speed;
+		}
+	} else {
+		trajectory.calculateVelXY();
 	}
 
-	//limit velocity to speed in Y
-	if ((velocity.y > speed) || (velocity.y < -speed)) {
-		if (velocity.y > 0)
-			velocity.y = speed;
-		else
-			velocity.y = -speed;
-	}
+	isColliding(enginePtr->MM.getMap());
 
-	trajectory.calculateVelXY();
-
-	isColliding(map);
-
+	if ((health <= 0)&&(!isDead))
+		kill();
 	//move virtual XY coordinates
-	setEntPos(pos.x+velocity.x, pos.y + velocity.y);
+	setEntPos(pos.x + velocity.x, pos.y + velocity.y);
 
 	//set animation rect
 	sprite.setTextureRect(animation.getRect(tex));
@@ -79,6 +84,11 @@ void Entity::update(TileMap * map) {
 	if (velocity.x > 0) velocity.x--; else if (velocity.x < 0) velocity.x++;
 	if (velocity.y > 0) velocity.y--; else if (velocity.y < 0) velocity.y++;
 
+}
+
+void Entity::kill(){
+	enginePtr->EM.annouceEntDeath(this);
+	isDead = true;
 }
 
 bool Entity::isColliding(TileMap *map) {
@@ -151,6 +161,8 @@ bool Entity::isColliding(TileMap *map) {
 		}
 	}
 
+	(collidesX || collidesY) ? colliding_s = true : colliding_s = false;
+
 	return (collidesX || collidesY) ? true : false;
 }
 
@@ -188,7 +200,15 @@ void Entity::setTrajectory(){
 	trajectory.calculateVelXY();
 }
 
+void Entity::setVisibility(bool)
+{
+}
+
 
 
 Entity::~Entity() {
+	if(!trajectory.complete)
+		trajectory.destroy();
+
+
 }

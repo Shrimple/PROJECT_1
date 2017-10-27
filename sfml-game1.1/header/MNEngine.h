@@ -28,15 +28,19 @@ public:
 
 	MNEngine();
 	~MNEngine();
+	//called every tick
+	void update();
+	void moveScreen();
+	void pollEvent();
+	void render();
+
+	//other members
 	bool init();
 	void loadTestTextures();
-	void render();
-	void pollEvent();
-	void moveScreen();
 	void spawnEntity(char *, int, int);
-	void update();
 	void onScreenDebug(bool);
 	void spawnPlayer();
+
 };
 #endif
 

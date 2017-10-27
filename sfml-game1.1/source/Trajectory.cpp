@@ -2,9 +2,23 @@
 #include "Entity.h"
 #include "SFML\Graphics.hpp"
 #include "SFML\Window.hpp"
+#include "MNEngine.h"
 
+
+void Trajectory::destroyTarget(){
+	target->kill();
+	complete = true;
+	hasTarget = false;
+}
 
 void Trajectory::calculateYaw(){
+}
+
+void Trajectory::destroy(){
+	complete = true;
+	target->kill();
+	destination = origin;
+	hasTarget = false;
 }
 
 void Trajectory::calculateVelXY(){
@@ -14,14 +28,11 @@ void Trajectory::calculateVelXY(){
 	if (!complete) {
 		lastPos = origin;
 		origin = parent->getPos();
+
 		if (origin == lastPos)
 			stuck++;
-		calculateYaw();
-	/**float m = (destination.y - origin.y) / (destination.x - origin.x),
-		  b = origin.y,
-		  x = ((parent->getPos().y + ((destination.y - origin.y) / parent->getSpeed())) - b) / m,
-		  y = m*x + b;
-		  **/
+
+		//calculateYaw();
 
 		if ((origin.x != destination.x) || (origin.y != destination.y)) {
 
@@ -35,23 +46,23 @@ void Trajectory::calculateVelXY(){
 
 			if (newVel.y > 2) {newVel.y = 2;	}
 
-				//std::cout << "trajectory : originvec=(" << origin.x << ", " << origin.y << ")" << std::endl;
-				//std::cout << "           : destvec=(" << destination.x << ", " << destination.y << ") yaw=" << yaw << std::endl;
-				//std::cout << "           : newVel=(" << newVel.x << ", " << newVel.y << ")" << std::endl;
-
 			parent->setVelocity(newVel.x, newVel.y);
 
 			if ((abs(destination.x - origin.x) < 1) && (abs(destination.y - origin.y) < 1)) {
-				complete = true;
+				destroyTarget();
 				parent->setVelocity(0, 0);
 			}
 
-			//complete = true;
+			stuck = 0;
 		}
 
 		if (stuck == 5) {
-			stuck = 0;
-			complete = true;
+			destroyTarget();
+			stuck = 0;	
+		}
+
+		if ((parent->getVelVector().x == 0) && (parent->getVelVector().y == 0)) {
+			destroyTarget();
 		}
 	}
 
@@ -60,14 +71,18 @@ void Trajectory::calculateVelXY(){
 
 void Trajectory::setTarget(sf::Vector2f dest){
 	destination = dest;
-}
-
-bool Trajectory::isComplete(){
-	return complete;
+	if (!hasTarget) {
+		parent->getEnginePtr()->EM.newEntity(4, dest.x, dest.y);
+		target = parent->getEnginePtr()->EM.getVec().back();
+		hasTarget = true;
+	} else {
+		target->setEntPos(destination.x, destination.y);
+	}
 }
 
 Trajectory::Trajectory(Entity * const parentEnt){
 	complete = true;
+	hasTarget = false;
 	lastPos = parentEnt->getPos();
 	parent = parentEnt;
 	origin = parentEnt->getPos();
@@ -77,6 +92,7 @@ Trajectory::Trajectory(Entity * const parentEnt){
 
 Trajectory::Trajectory(){
 	complete = true;
+	hasTarget = false;
 	parent = NULL;
 	lastPos = { 0,0 };
 	origin = { 0,0 };
@@ -84,6 +100,5 @@ Trajectory::Trajectory(){
 }
 
 
-Trajectory::~Trajectory()
-{
+Trajectory::~Trajectory(){
 }

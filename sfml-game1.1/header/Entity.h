@@ -12,23 +12,27 @@ class MNEngine;
 class Entity{
 protected:
 	MNEngine* enginePtr;
-	int speed = 2, tex, yaw;
-	//0-7 diagonals count
+	int health = 100, speed = 2, tex, yaw, id;
+	//0-7 diagonals count(old)
 	sf::Vector2f pos, velocity;
 	sf::Sprite sprite;
 	csp::EntityType type;
 	Animation animation;
 	//linear trajectory
 	Trajectory trajectory;
-	bool isColliding(TileMap *);
+	//useful states (states finish with _s)
+	bool visible_s = true, colliding_s = false;
 
 public:
-	Entity(MNEngine* const);
-	Entity(MNEngine* const, int textureVectorIndex, csp::EntityType type);
-	Entity(MNEngine* const, int textureVectorIndex, csp::EntityType type, float xOff, float yOff);
-	~Entity();
+	bool isDead = false;
 
-	void update(TileMap *);
+	Entity(MNEngine* const, int);
+	Entity(MNEngine* const, int textureVectorIndex, csp::EntityType type, int);
+	Entity(MNEngine* const, int textureVectorIndex, csp::EntityType type, float xOff, float yOff, int);
+	virtual ~Entity();
+
+	void update();
+	void kill();
 	void setAnim(Animation);
 	void setDirection(int);
 	void setSpeed(int sp) { speed = sp; };
@@ -36,12 +40,18 @@ public:
 	void setTexture(int);
 	void setVelocity(float, float);
 	void setTrajectory();
+	void setVisibility(bool);
 
 	int getTexIndex() { return tex; };
 	int getSpeed() { return speed; };
+	int getId() { return id; };
 	float getYaw() { return yaw; };
 	float getVX() { return velocity.x; };
 	float getVY() { return velocity.y; };
+	bool isVisible() { return visible_s; };
+	bool isColliding(TileMap *);
+	MNEngine* getEnginePtr() {return enginePtr; };
+
 
 	sf::Sprite getSprite() { return sprite; };
 	sf::Vector2f getPos() { return pos; };
