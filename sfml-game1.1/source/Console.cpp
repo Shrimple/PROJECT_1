@@ -11,8 +11,7 @@ Console::Console()
 	Commands.push_back("MOUSE_DEBUG");
 	Commands.push_back("HISTORY");
 	Commands.push_back("CLEAR");
-	Commands.push_back("CLASSIFY");  // "classify" is here to provide an example of "C"+[tab] completing to "CL" and displaying matches.
-	
+
 	
 	AddLog("Welcome to MidNight Console");
 }

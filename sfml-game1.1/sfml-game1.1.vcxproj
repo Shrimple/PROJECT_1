@@ -192,12 +192,15 @@
     <ClInclude Include="header\imgui-SFML.h" />
     <ClInclude Include="header\imgui.h" />
     <ClInclude Include="header\imgui_internal.h" />
+    <ClInclude Include="header\Inventory.h" />
+    <ClInclude Include="header\Item.h" />
     <ClInclude Include="header\MapManager.h" />
     <ClInclude Include="header\MNEngine.h" />
     <ClInclude Include="header\Player.h" />
     <ClInclude Include="header\stb_rect_pack.h" />
     <ClInclude Include="header\stb_textedit.h" />
     <ClInclude Include="header\stb_truetype.h" />
+    <ClInclude Include="header\S_Sword.h" />
     <ClInclude Include="header\Tile.h" />
     <ClInclude Include="header\TileMap.h" />
     <ClInclude Include="header\Camera.h" />

@@ -218,6 +218,15 @@
     <ClInclude Include="header\Console.h">
       <Filter>Header Files\Core\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="header\Item.h">
+      <Filter>Header Files\Core\Khashan</Filter>
+    </ClInclude>
+    <ClInclude Include="header\Inventory.h">
+      <Filter>Header Files\Core\Khashan</Filter>
+    </ClInclude>
+    <ClInclude Include="header\S_Sword.h">
+      <Filter>Header Files\Core\Khashan</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
