@@ -20,6 +20,7 @@ void MNEngine::loadTestTextures(){
 		TM.loadTex("testtex.png");
 		TM.loadTex("testen.png");
 		TM.loadTex("bridgetile.png");
+		TM.loadTex("target.png");
 }
 
 void MNEngine::render(){
@@ -92,6 +93,7 @@ void MNEngine::update(){
 	AM.incCtr();
 	AM.incAnimFrames();
 	EM.updateEnts(MM.getMap());
+	EM.cleanVector();
 	moveScreen();
 	Debug::draw();
 }
