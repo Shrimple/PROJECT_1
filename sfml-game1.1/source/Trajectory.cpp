@@ -50,6 +50,7 @@ void Trajectory::calculateVelXY(){
 
 		if (stuck == 5) {
 			stuck = 0;
+			target->kill();
 			complete = true;
 		}
 
