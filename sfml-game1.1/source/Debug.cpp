@@ -6,6 +6,8 @@
 
 bool Debug::os_debug;
 bool Debug::drawTrajectories;
+bool Debug::drawHitboxes;
+
 char Debug::time[32];
 char Debug::entVec_1[32];
 char Debug::entVec_2[32];
@@ -26,6 +28,16 @@ void Debug::drawInGame(MNEngine* const e){
 
 		if (os_debug && (vertices.size() > 0)) {
 			for (std::array<sf::Vertex, 2> line : vertices) {
+				e->Cam.window->draw(&line[0], line.size(), sf::Lines);
+			}
+		}
+	}
+
+	if (drawHitboxes) {
+		std::vector<std::array<sf::Vertex, 4>> vertices = getHitboxes(e);
+
+		if (os_debug && (vertices.size() > 0)) {
+			for (std::array<sf::Vertex, 4> line : vertices) {
 				e->Cam.window->draw(&line[0], line.size(), sf::Lines);
 			}
 		}
@@ -66,6 +78,34 @@ std::vector<std::array<sf::Vertex, 2>> Debug::getTrajectories(MNEngine* const e 
 	return vertices;
 }
 
+std::vector<std::array<sf::Vertex, 4>> Debug::getHitboxes(MNEngine * const e){
+	std::vector<std::array<sf::Vertex, 4>> vertices;
+
+	for (boost::shared_ptr<Entity> ent : e->EM.getVec()) {
+		std::array<sf::Vertex, 4> line;
+		int i = 0;
+		for (sf::Vector2f p : ent->getHitbox().getVPoints()) {
+			//if((line.size()-1) <= i)
+			line[i] = sf::Vertex(p, sf::Color::Magenta);
+			i++;
+		}
+		vertices.push_back(line);
+	}
+
+	if (!e->EM.player->isDead) {
+		std::array<sf::Vertex, 4> line;
+		int i = 0;
+		for (sf::Vector2f p : e->EM.player->getHitbox().getVPoints()) {
+			//if ((line.size() - 1) <= i)
+				line[i] = sf::Vertex(p, sf::Color::Magenta);
+				i++;
+		}
+		vertices.push_back(line);
+	}
+
+	return vertices;
+}
+
 void Debug::setState(bool state){
 	os_debug = state;
 }
@@ -81,9 +121,11 @@ void Debug::draw(){
 		if (ImGui::Button("Console"))
 			MNEngine::console.isEnable = !MNEngine::console.isEnable;
 
-		if (ImGui::Button("trajTog"))
+		if (ImGui::Button("TogTraj"))
 			drawTrajectories = !drawTrajectories;
 
+		if (ImGui::Button("TogHitB"))
+			drawHitboxes = !drawHitboxes;
 
 		if (MNEngine::console.isEnable)
 			MNEngine::console.Draw("Console");
@@ -93,7 +135,7 @@ void Debug::draw(){
 
 	//Nic Stuff
 
-		ImGui::Text("Nic Stuff");
+		ImGui::Text("dbg");
 		ImGui::NewLine();
 
 		ImGui::Text(time);

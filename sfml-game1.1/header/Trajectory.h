@@ -9,12 +9,12 @@ class Trajectory{
 private:
 	Entity* parent;
 	boost::shared_ptr<Entity> target;
-	//           x1, y1    x2, y2
-	sf::Vector2f origin, lastPos; 
+	sf::Vector2f origin, lastPos, trajVel; 
 	
 public:
 	bool hasTarget;
 	bool complete;
+	bool interrupted;
 	int stuck = 0;
 
 	Trajectory(Entity* const);

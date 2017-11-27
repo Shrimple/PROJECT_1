@@ -29,7 +29,7 @@ bool MapManager::loadMap(std::string mapPath, std::string tileSetPath){
 
 		int i = 0;
 		while (fp >> tileData) {
-			std::cout << tileData;
+			//std::cout << tileData;
 			rawMap[i] = ((int)tileData - '0');
 			i++;
 		}

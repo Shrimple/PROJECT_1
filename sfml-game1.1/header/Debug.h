@@ -11,6 +11,7 @@ class Debug{
 private:
 	static bool os_debug;
 	static bool drawTrajectories;
+	static bool drawHitboxes;
 
 	static char entVec_1[32];
 	static char entVec_2[32];
@@ -22,6 +23,7 @@ private:
 	static char player_2[32];
 
 	static std::vector<std::array<sf::Vertex, 2>> getTrajectories(MNEngine* const);
+	static std::vector<std::array<sf::Vertex, 4>> getHitboxes(MNEngine* const);
 public:
 	Debug();
 	~Debug();

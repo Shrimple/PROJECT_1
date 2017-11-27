@@ -41,6 +41,9 @@ void Player::pollMove() {
 	//debug key
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) {
+			enginePtr->EM.newEntity(2, enginePtr->Cam.getMousePos().x, enginePtr->Cam.getMousePos().y);
+		}
 
 		//If mouse is  in the debug menu - > cancel event for the game.
 		if (!ImGui::GetIO().WantCaptureMouse){

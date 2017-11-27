@@ -1,4 +1,3 @@
-#pragma once
 #ifndef MAPMANAGER_H
 #define MAPMANAGER_H
 #include "Namespace.h"

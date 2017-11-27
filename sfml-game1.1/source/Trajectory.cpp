@@ -17,6 +17,7 @@ void Trajectory::check(){
 			}
 		}
 
+
 		bool xreach = false, yreach = false;
 
 		if ((parent->getPos().x >= target->getPos().x) && parent->getVelVector().x > 0) {
@@ -30,6 +31,26 @@ void Trajectory::check(){
 		}
 		if ((parent->getPos().y <= target->getPos().y) && parent->getVelVector().y < 0) {
 			yreach = true;
+		}
+
+		if (!parent->isColliding()) {
+			if (interrupted) {
+				origin = parent->getPos();
+				calculateVelXY();
+				xreach = false;
+				yreach = false;
+				interrupted = false;
+			}
+		}else{
+			interrupted = true;
+		}
+
+		if (xreach) {
+			parent->setVelocity(0, parent->getVelVector().y);
+		}
+
+		if (yreach) {
+			parent->setVelocity(parent->getVelVector().y, 0);
 		}
 
 		if (xreach && yreach) {
@@ -57,7 +78,7 @@ void Trajectory::calculateYaw(){
 		}
 
 		parent->setYaw(angle);
-		std::cout << "yaw: " << angle << std::endl;
+		//std::cout << "yaw: " << angle << std::endl;
 	}
 }
 
@@ -78,9 +99,10 @@ void Trajectory::calculateVelXY(){
 		sf::Vector2f dir = { (target->getPos().x - origin.x) / distance, (target->getPos().y - origin.y) / distance };
 
 		newVel = sf::Vector2f(dir.x * speed, dir.y * speed);
-		std::cout << "dist=" << distance << ", deltaDis=x" << deltaD.x << "|y" << deltaD.y
-				  << ", dir=x" << dir.x << "|y" << dir.y << std::endl << "newVel=x" << newVel.x << "|y" << newVel.y << std::endl;
+	//	std::cout << "dist=" << distance << ", deltaDis=x" << deltaD.x << "|y" << deltaD.y
+	//			  << ", dir=x" << dir.x << "|y" << dir.y << std::endl << "newVel=x" << newVel.x << "|y" << newVel.y << std::endl;
 		parent->setVelocity(newVel.x, newVel.y);
+		trajVel = newVel;
 	}
 
 	return;

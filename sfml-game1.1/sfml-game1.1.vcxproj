@@ -156,19 +156,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Path.cpp" />
-    <ClCompile Include="PathSeg.cpp" />
     <ClCompile Include="source\Animation.cpp" />
     <ClCompile Include="source\AnimationManager.cpp" />
     <ClCompile Include="source\Console.cpp" />
     <ClCompile Include="source\Debug.cpp" />
     <ClCompile Include="source\Entity.cpp" />
     <ClCompile Include="source\EntityManager.cpp" />
+    <ClCompile Include="source\Hitbox.cpp" />
     <ClCompile Include="source\imgui-SFML.cpp" />
     <ClCompile Include="source\imgui.cpp" />
     <ClCompile Include="source\imgui_draw.cpp" />
     <ClCompile Include="source\MapManager.cpp" />
     <ClCompile Include="source\MNEngine.cpp" />
+    <ClCompile Include="source\Path.cpp" />
+    <ClCompile Include="source\PathSeg.cpp" />
     <ClCompile Include="source\Player.cpp" />
     <ClCompile Include="source\Tile.cpp" />
     <ClCompile Include="source\TileMap.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="header\Entity.h" />
     <ClInclude Include="header\EntityManager.h" />
     <ClInclude Include="header\EntityType.h" />
+    <ClInclude Include="header\Hitbox.h" />
     <ClInclude Include="header\imconfig-SFML.h" />
     <ClInclude Include="header\imconfig.h" />
     <ClInclude Include="header\imgui-SFML.h" />
@@ -196,6 +198,8 @@
     <ClInclude Include="header\Item.h" />
     <ClInclude Include="header\MapManager.h" />
     <ClInclude Include="header\MNEngine.h" />
+    <ClInclude Include="header\Path.h" />
+    <ClInclude Include="header\PathSeg.h" />
     <ClInclude Include="header\Player.h" />
     <ClInclude Include="header\stb_rect_pack.h" />
     <ClInclude Include="header\stb_textedit.h" />
@@ -209,8 +213,6 @@
     <ClInclude Include="header\TextureManager.h" />
     <ClInclude Include="header\TileType.h" />
     <ClInclude Include="header\Trajectory.h" />
-    <ClInclude Include="Path.h" />
-    <ClInclude Include="PathSeg.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

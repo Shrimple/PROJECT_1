@@ -17,6 +17,7 @@ Entity::Entity(MNEngine* const ptr, int uid){
 	yaw = 0;
 	animation = enginePtr->AM.loadNewAnimation(this, sprite.getTexture()->getSize().x/enginePtr->TILE_SIZE);
 	animation->applyRect();
+	hitbox = Hitbox(this);
 }
 
 Entity::Entity(MNEngine* const ptr,int textureVectorIndex, EntityType pType, int uid) {
@@ -31,6 +32,7 @@ Entity::Entity(MNEngine* const ptr,int textureVectorIndex, EntityType pType, int
 	yaw = 0;
 	animation = enginePtr->AM.loadNewAnimation(this, sprite.getTexture()->getSize().x / enginePtr->TILE_SIZE);
 	animation->applyRect();
+	hitbox = Hitbox(this);
 }
 
 Entity::Entity(MNEngine* const ptr, int textureVectorIndex, EntityType pType, float xOff, float yOff, int uid) {
@@ -46,6 +48,7 @@ Entity::Entity(MNEngine* const ptr, int textureVectorIndex, EntityType pType, fl
 	yaw = 0;
 	animation = enginePtr->AM.loadNewAnimation(this, sprite.getTexture()->getSize().x / enginePtr->TILE_SIZE);
 	animation->applyRect();
+	hitbox = Hitbox(this);
 }
 
 void Entity::update() {
@@ -70,7 +73,7 @@ void Entity::update() {
 		trajectory.check();
 	}
 
-	isColliding(enginePtr->MM.getMap());
+	detectCollision();
 
 	if ((health <= 0)&&(!isDead))
 		kill();
@@ -90,7 +93,8 @@ void Entity::kill(){
 	enginePtr->EM.annouceEntDeath(id);
 }
 
-bool Entity::isColliding(TileMap *map) {
+bool Entity::detectCollision() {
+	TileMap *map = enginePtr->MM.getMap();
 	bool	collidesX	= false,
 			collidesY	= false;
 
@@ -163,6 +167,10 @@ bool Entity::isColliding(TileMap *map) {
 	(collidesX || collidesY) ? colliding_s = true : colliding_s = false;
 
 	return (collidesX || collidesY) ? true : false;
+}
+
+bool Entity::isColliding(){
+	return colliding_s;
 }
 
 void Entity::setAnim(Animation* a) {

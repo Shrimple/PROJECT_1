@@ -7,6 +7,7 @@
 #include "Namespace.h"
 #include "Animation.h"
 #include "Trajectory.h"
+#include "Hitbox.h"
 
 class MNEngine;
 class Entity{
@@ -21,6 +22,7 @@ protected:
 	sf::Vector2f pos, velocity;
 	sf::Sprite sprite;
 	csp::EntityType type;
+	Hitbox hitbox;
 	//linear trajectory (for now)
 	Trajectory trajectory;
 
@@ -51,8 +53,10 @@ public:
 	float getVX() { return velocity.x; };
 	float getVY() { return velocity.y; };
 	Trajectory getTrajectory() { return trajectory; };
+	Hitbox getHitbox() { return hitbox; };
 	bool isVisible() { return visible_s; };
-	bool isColliding(TileMap *);
+	bool detectCollision();
+	bool isColliding();
 	MNEngine* getEnginePtr() {return enginePtr; };
 
 

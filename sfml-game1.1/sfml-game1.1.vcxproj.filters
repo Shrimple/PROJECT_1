@@ -129,11 +129,14 @@
     <ClCompile Include="source\Console.cpp">
       <Filter>Source Files\Core\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Path.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="source\PathSeg.cpp">
+      <Filter>Source Files\Core\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="PathSeg.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="source\Path.cpp">
+      <Filter>Source Files\Core\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Hitbox.cpp">
+      <Filter>Source Files\Core\Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -230,11 +233,14 @@
     <ClInclude Include="header\TileType.h">
       <Filter>Header Files\Core\Map</Filter>
     </ClInclude>
-    <ClInclude Include="Path.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="header\Hitbox.h">
+      <Filter>Header Files\Core\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="PathSeg.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="header\Path.h">
+      <Filter>Header Files\Core\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="header\PathSeg.h">
+      <Filter>Header Files\Core\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
