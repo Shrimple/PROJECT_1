@@ -12,10 +12,12 @@ class EntityManager
 {
 private:
 	std::vector<boost::shared_ptr<Entity>> ent_ptrVec;
-	std::vector<Entity*> deadEntities;
+	std::vector<int> deadEntities;
 	MNEngine* enginePtr;
 	int uuid;
 	int TEMP_CTR;
+
+	void cleanVector();
 public:
 	Player * player;
 
@@ -28,8 +30,7 @@ public:
 	void updateEnts(TileMap*);
 	void newPlayerEnt();
 	void newEntity(int texIndex, int xOff, int yOff);
-	void annouceEntDeath(Entity*);
-	void cleanVector();
+	void annouceEntDeath(int);
 
 	int getLastId();
 };

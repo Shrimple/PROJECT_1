@@ -5,22 +5,15 @@
 #include "boost\shared_ptr.hpp"
 
 class Entity;
-class Trajectory
-{
+class Trajectory{
 private:
 	Entity* parent;
 	boost::shared_ptr<Entity> target;
 	//           x1, y1    x2, y2
-	sf::Vector2f origin, destination, lastPos; 
-	bool hasTarget;
-	float m;
-	float x;
-	float b;
-
-	//facing completely right
-	float yaw = 0;
+	sf::Vector2f origin, lastPos; 
 	
 public:
+	bool hasTarget;
 	bool complete;
 	int stuck = 0;
 
@@ -28,9 +21,13 @@ public:
 	Trajectory();
 	~Trajectory();
 
+	sf::Vector2f getTarget();
+	sf::Vector2f getOrigin() { return origin; };
+
+	void check();
+	void destroy();
 	void destroyTarget();
 	void calculateYaw();
-	void destroy();
 	void calculateVelXY();
 	void setTarget(sf::Vector2f);
 };

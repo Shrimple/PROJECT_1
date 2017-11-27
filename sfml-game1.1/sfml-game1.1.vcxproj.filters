@@ -129,6 +129,12 @@
     <ClCompile Include="source\Console.cpp">
       <Filter>Source Files\Core\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Path.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PathSeg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header\Animation.h">
@@ -223,6 +229,12 @@
     </ClInclude>
     <ClInclude Include="header\TileType.h">
       <Filter>Header Files\Core\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Path.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PathSeg.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -4,23 +4,27 @@
 #include "AnimType.h"
 
 class MNEngine;
-class AnimationManager;
+class Entity;
 class Animation{
 private:
 	bool loop;
 	int frames;
 	int currentFrame;
 	AnimType type;
-	AnimationManager* parent;
+	Entity* parent;
 
 public:
-	Animation(MNEngine* const, const Animation &);
-	Animation(MNEngine* const, int i);
-	Animation(MNEngine* const);
+	Animation(const Animation &);
+	Animation(Entity* const, int);
 	Animation();
 	~Animation();
+
+	bool hasParent();
+
+	void setParentNULL();
 	void incFrame();
 	void decFrame();
+	void applyRect();
 	sf::IntRect getRect(int texIndex);
 };
 #endif

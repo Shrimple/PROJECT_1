@@ -10,18 +10,19 @@
 
 class MNEngine;
 class Entity{
+friend class Animation;
 protected:
 	MNEngine* enginePtr;
+	Animation* animation;
 	int health = 100, speed = 2, tex, yaw, id;
+	//useful states (states finish with _s)
+	bool visible_s = true, colliding_s = false;
 	//0-7 diagonals count(old)
 	sf::Vector2f pos, velocity;
 	sf::Sprite sprite;
 	csp::EntityType type;
-	Animation animation;
-	//linear trajectory
+	//linear trajectory (for now)
 	Trajectory trajectory;
-	//useful states (states finish with _s)
-	bool visible_s = true, colliding_s = false;
 
 public:
 	bool isDead = false;
@@ -33,21 +34,23 @@ public:
 
 	void update();
 	void kill();
-	void setAnim(Animation);
-	void setDirection(int);
+	void setAnim(Animation*);
 	void setSpeed(int sp) { speed = sp; };
 	void setEntPos(float, float);
 	void setTexture(int);
 	void setVelocity(float, float);
 	void setTrajectory();
 	void setVisibility(bool);
+	void setRect(sf::IntRect);
+	void setYaw(int);
 
 	int getTexIndex() { return tex; };
 	int getSpeed() { return speed; };
 	int getId() { return id; };
-	float getYaw() { return yaw; };
+	int getYaw() { return yaw; };
 	float getVX() { return velocity.x; };
 	float getVY() { return velocity.y; };
+	Trajectory getTrajectory() { return trajectory; };
 	bool isVisible() { return visible_s; };
 	bool isColliding(TileMap *);
 	MNEngine* getEnginePtr() {return enginePtr; };
@@ -57,6 +60,6 @@ public:
 	sf::Vector2f getPos() { return pos; };
 	sf::Vector2f getVelVector() { return velocity; };
 	csp::EntityType getType() { return type; };
-	Animation getAnim() { return animation; };
+	Animation* getAnim() { return animation; };
 };
 #endif

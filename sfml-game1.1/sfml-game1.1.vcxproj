@@ -156,6 +156,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Path.cpp" />
+    <ClCompile Include="PathSeg.cpp" />
     <ClCompile Include="source\Animation.cpp" />
     <ClCompile Include="source\AnimationManager.cpp" />
     <ClCompile Include="source\Console.cpp" />
@@ -207,6 +209,8 @@
     <ClInclude Include="header\TextureManager.h" />
     <ClInclude Include="header\TileType.h" />
     <ClInclude Include="header\Trajectory.h" />
+    <ClInclude Include="Path.h" />
+    <ClInclude Include="PathSeg.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

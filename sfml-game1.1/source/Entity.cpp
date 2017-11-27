@@ -15,7 +15,8 @@ Entity::Entity(MNEngine* const ptr, int uid){
 	sprite.setTexture(enginePtr->TM.get(tex));
 	sprite.setPosition(pos.x - (enginePtr->TILE_SIZE / 2), pos.y - (enginePtr->TILE_SIZE / 2));
 	yaw = 0;
-	animation = Animation(ptr, tex);
+	animation = enginePtr->AM.loadNewAnimation(this, sprite.getTexture()->getSize().x/enginePtr->TILE_SIZE);
+	animation->applyRect();
 }
 
 Entity::Entity(MNEngine* const ptr,int textureVectorIndex, EntityType pType, int uid) {
@@ -28,7 +29,8 @@ Entity::Entity(MNEngine* const ptr,int textureVectorIndex, EntityType pType, int
 	sprite.setTexture(enginePtr->TM.get(tex));
 	sprite.setPosition(pos.x - (enginePtr->TILE_SIZE / 2), pos.y -(enginePtr->TILE_SIZE / 2));
 	yaw = 0;
-	animation = Animation(ptr, tex);
+	animation = enginePtr->AM.loadNewAnimation(this, sprite.getTexture()->getSize().x / enginePtr->TILE_SIZE);
+	animation->applyRect();
 }
 
 Entity::Entity(MNEngine* const ptr, int textureVectorIndex, EntityType pType, float xOff, float yOff, int uid) {
@@ -42,13 +44,14 @@ Entity::Entity(MNEngine* const ptr, int textureVectorIndex, EntityType pType, fl
 	sprite.setTexture(enginePtr->TM.get(tex));
 	sprite.setPosition(xOff - (enginePtr->TILE_SIZE / 2), yOff - (enginePtr->TILE_SIZE / 2));
 	yaw = 0;
-	animation = Animation(ptr, tex);
+	animation = enginePtr->AM.loadNewAnimation(this, sprite.getTexture()->getSize().x / enginePtr->TILE_SIZE);
+	animation->applyRect();
 }
 
 void Entity::update() {
-	//limit velocity to speed in X
 	//if there is no active trajectory enable wasd movement
 	if (trajectory.complete) {
+		//limit velocity to speed in X
 		if ((velocity.x > speed) || (velocity.x < -speed)) {
 			if (velocity.x > 0)
 				velocity.x = speed;
@@ -64,7 +67,7 @@ void Entity::update() {
 				velocity.y = -speed;
 		}
 	} else {
-		trajectory.calculateVelXY();
+		trajectory.check();
 	}
 
 	isColliding(enginePtr->MM.getMap());
@@ -74,21 +77,17 @@ void Entity::update() {
 	//move virtual XY coordinates
 	setEntPos(pos.x + velocity.x, pos.y + velocity.y);
 
-	//set animation rect
-	sprite.setTextureRect(animation.getRect(tex));
-
-	if ((enginePtr->AM.counter % enginePtr->AM.mod) == 0) {
-		animation.incFrame();
+	if (trajectory.complete) {
+		if (velocity.x > 0) velocity.x--; else if (velocity.x < 0) velocity.x++;
+		if (velocity.y > 0) velocity.y--; else if (velocity.y < 0) velocity.y++;
 	}
-
-	if (velocity.x > 0) velocity.x--; else if (velocity.x < 0) velocity.x++;
-	if (velocity.y > 0) velocity.y--; else if (velocity.y < 0) velocity.y++;
 
 }
 
 void Entity::kill(){
-	enginePtr->EM.annouceEntDeath(this);
+	animation->setParentNULL();
 	isDead = true;
+	enginePtr->EM.annouceEntDeath(id);
 }
 
 bool Entity::isColliding(TileMap *map) {
@@ -166,16 +165,8 @@ bool Entity::isColliding(TileMap *map) {
 	return (collidesX || collidesY) ? true : false;
 }
 
-void Entity::setAnim(Animation a) {
+void Entity::setAnim(Animation* a) {
 	animation = a;
-}
-
-void Entity::setDirection(int dir) {
-	if (dir < 8)
-		yaw = dir;
-	else {
-		yaw = 0;
-	}
 }
 
 void Entity::setEntPos(float x, float y) {
@@ -197,11 +188,17 @@ void Entity::setVelocity(float xVel, float yVel) {
 void Entity::setTrajectory(){
 	trajectory.complete = false;
 	trajectory.setTarget(enginePtr->Cam.getMousePos());
-	trajectory.calculateVelXY();
 }
 
-void Entity::setVisibility(bool)
-{
+void Entity::setVisibility(bool){
+}
+
+void Entity::setRect(sf::IntRect rect){
+	sprite.setTextureRect(rect);
+}
+
+void Entity::setYaw(int pYaw){
+	yaw = pYaw;
 }
 
 
@@ -210,5 +207,5 @@ Entity::~Entity() {
 	if(!trajectory.complete)
 		trajectory.destroy();
 
-
+	animation = nullptr;
 }

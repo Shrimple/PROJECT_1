@@ -5,14 +5,31 @@
 #include "Entity.h"
 
 bool Debug::os_debug;
+bool Debug::drawTrajectories;
+char Debug::time[32];
+char Debug::entVec_1[32];
+char Debug::entVec_2[32];
 char Debug::tiles_1[32];
 char Debug::tiles_2[32];
 char Debug::tiles_3[32];
 char Debug::player_1[32];
 char Debug::player_2[32];
 
+
 void Debug::init() {
 	os_debug = false;
+}
+
+void Debug::drawInGame(MNEngine* const e){
+	if (drawTrajectories) {
+		std::vector<std::array<sf::Vertex, 2>> vertices = getTrajectories(e);
+
+		if (os_debug && (vertices.size() > 0)) {
+			for (std::array<sf::Vertex, 2> line : vertices) {
+				e->Cam.window->draw(&line[0], line.size(), sf::Lines);
+			}
+		}
+	}
 }
 
 void Debug::printPPos(MNEngine* const ePtr) {
@@ -23,47 +40,78 @@ bool Debug::isActive() {
 	return os_debug;
 }
 
+std::vector<std::array<sf::Vertex, 2>> Debug::getTrajectories(MNEngine* const e ){
+	std::vector<std::array<sf::Vertex, 2>> vertices;
+
+	for (boost::shared_ptr<Entity> ent : e->EM.getVec()) {
+		if (ent->getTrajectory().hasTarget) {
+			std::array<sf::Vertex,2> line = {
+				sf::Vertex(ent->getTrajectory().getTarget(), sf::Color::Yellow),
+				sf::Vertex(ent->getTrajectory().getOrigin(), sf::Color::Yellow)
+			};
+
+			vertices.push_back(line);
+		}
+	}
+
+	if (e->EM.player->getTrajectory().hasTarget) {
+		std::array<sf::Vertex, 2> line = {
+			sf::Vertex(e->EM.player->getTrajectory().getTarget(), sf::Color::Red),
+			sf::Vertex(e->EM.player->getTrajectory().getOrigin(), sf::Color::Red)
+		};
+
+		vertices.push_back(line);
+	}
+
+	return vertices;
+}
+
 void Debug::setState(bool state){
 	os_debug = state;
 }
 
 
-void Debug::draw()
-{
-	if (isActive())
-	{
-	ImGui::SetNextWindowSize(ImVec2(160, 350));
-	char buf[128];
-	sprintf_s(buf, "Debug %c %d###AnimatedTitle", "|/-\\"[(int)(ImGui::GetTime() / 0.25f) & 3], rand());
-	ImGui::Begin(buf);
+void Debug::draw(){
+	if (isActive()){
+		ImGui::SetNextWindowSize(ImVec2(160, 350));
+		char buf[128];
+		sprintf_s(buf, "Debug %c %d###AnimatedTitle", "|/-\\"[(int)(ImGui::GetTime() / 0.25f) & 3], rand());
+		ImGui::Begin(buf);
 
-	if (ImGui::Button("Console"))
-		MNEngine::console.isEnable = !MNEngine::console.isEnable;
+		if (ImGui::Button("Console"))
+			MNEngine::console.isEnable = !MNEngine::console.isEnable;
 
-	if (MNEngine::console.isEnable)
-		MNEngine::console.Draw("Console");
+		if (ImGui::Button("trajTog"))
+			drawTrajectories = !drawTrajectories;
+
+
+		if (MNEngine::console.isEnable)
+			MNEngine::console.Draw("Console");
 	
-	ImGui::Separator();
+		ImGui::Separator();
 
 
 	//Nic Stuff
 
-	ImGui::Text("Nic Stuff");
-	ImGui::NewLine();
+		ImGui::Text("Nic Stuff");
+		ImGui::NewLine();
 
-	ImGui::Text(tiles_1);
-	ImGui::Text(tiles_2);
-	ImGui::Text(tiles_3);
-	ImGui::Text(player_1);
-	ImGui::Text(player_2);
+		ImGui::Text(time);
+		ImGui::Text(entVec_1);
+		ImGui::Text(entVec_2);
+		ImGui::Text(tiles_1);
+		ImGui::Text(tiles_2);
+		ImGui::Text(tiles_3);
+		ImGui::Text(player_1);
+		ImGui::Text(player_2);
 
-	ImGui::Separator();
+		ImGui::Separator();
 
-	ImGui::Text("Sim Stuff");
-	ImGui::NewLine();
-	ImGui::Text("Rip =(");
+		ImGui::Text("Sim Stuff");
+		ImGui::NewLine();
+		ImGui::Text("Rip =(");
 
-	ImGui::End();
+		ImGui::End();
 	}
 }
 
@@ -79,6 +127,8 @@ void Debug::updateOSD(MNEngine* const ePtr, TileMap * map) {
 			tlT = map->getTile((ePtr->EM.player->getPos().x - ePtr->TILE_SIZE), ePtr->EM.player->getPos().y - ePtr->TILE_SIZE).type,
 			blT = map->getTile(ePtr->EM.player->getPos().x - ePtr->TILE_SIZE, (ePtr->EM.player->getPos().y + ePtr->TILE_SIZE)).type;
 
+		sprintf_s(time, "time: %d",(int) ePtr->getTimeMS());
+		sprintf_s(entVec_1, "em size: %i", ePtr->EM.getVec().size());
 		sprintf_s(tiles_1, "%d %d %d", tlT , tT  , trT);
 		sprintf_s(tiles_2, "%d %d %d", lT  , cT  , rT);
 		sprintf_s(tiles_3, "%d %d %d", blT , bT  , brT);

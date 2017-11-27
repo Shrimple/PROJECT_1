@@ -8,6 +8,7 @@ MNEngine MNE;
 
 void main() {
 	MNE.init();
+
 	MNE.loadTestTextures();
 
 	//setup dev zone
@@ -16,10 +17,10 @@ void main() {
 
 	//test 
 	MNE.spawnPlayer();
-	MNE.spawnEntity("testen.png", 120, 110);
-	MNE.spawnEntity("testen.png", 140, 110);
-	MNE.spawnEntity("testen.png", 160, 120);
-	MNE.spawnEntity("testen.png", 180, 140);
+//	MNE.spawnEntity("testen.png", 120, 110);
+//	MNE.spawnEntity("testen.png", 140, 110);
+//	MNE.spawnEntity("testen.png", 160, 120);
+//	MNE.spawnEntity("testen.png", 180, 140);
 	
 	//So this is how it works.
 
@@ -30,7 +31,6 @@ void main() {
 		MNE.pollEvent();
 		MNE.update();
 		MNE.render();
-		std::this_thread::sleep_for(std::chrono::milliseconds(1));;
 	}
 
 

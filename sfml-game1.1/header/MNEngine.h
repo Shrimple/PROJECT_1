@@ -17,6 +17,7 @@ class MNEngine
 {
 private:
 	sf::Clock deltaClock;
+
 public:
 	const int TILE_SIZE = 20;
 	TextureManager TM;
@@ -36,6 +37,7 @@ public:
 
 	//other members
 	bool init();
+	float getTimeMS();
 	void loadTestTextures();
 	void spawnEntity(char *, int, int);
 	void onScreenDebug(bool);

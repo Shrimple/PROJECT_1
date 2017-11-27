@@ -5,12 +5,14 @@
 #include <boost\shared_ptr.hpp>
 #include "Player.h"
 
+class Entity;
 class MNEngine;
 
 class AnimationManager{
 	friend class Animation;
 private:
 	MNEngine* enginePtr;
+	std::vector<Animation*> activeAnimations;
 
 public:
 	const int mod = 2;
@@ -18,10 +20,11 @@ public:
 
 	AnimationManager();
 	~AnimationManager();
+
+	Animation* loadNewAnimation(Entity*, int);
 	void init(MNEngine* const);
-	void loadAnimFromEnt(boost::shared_ptr<Entity>);
-	void loadAnimFromP(Player *);
-	void loadWorldAnim(TileMap *);
+	void update();
+	void cleanVector();
 	void incCtr();
 	void incAnimFrames();
 };

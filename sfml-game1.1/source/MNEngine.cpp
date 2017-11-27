@@ -12,6 +12,7 @@ bool MNEngine::init(){
 	AM.init(this);
 	Cam.init(this);
 	ImGui::SFML::Init(*Cam.window);
+	deltaClock.restart();
 	return true;
 }
 
@@ -36,6 +37,7 @@ void MNEngine::render(){
 	Cam.window->draw(EM.player->getSprite());
 
 	Debug::updateOSD(this, MM.getMap());
+	Debug::drawInGame(this);
 
 	ImGui::SFML::Render(*Cam.window);
 	Cam.window->display();
@@ -77,11 +79,11 @@ void MNEngine::spawnEntity(char * fileName, int xoff, int yoff){
 
 void MNEngine::update(){
 	ImGui::SFML::Update(*Cam.window, deltaClock.restart());
+	moveScreen();
+	AM.update();
 	AM.incCtr();
 	AM.incAnimFrames();
 	EM.updateEnts(MM.getMap());
-	EM.cleanVector();
-	moveScreen();
 	Debug::draw();
 }
 
@@ -91,6 +93,10 @@ void MNEngine::onScreenDebug(bool)
 
 void MNEngine::spawnPlayer(){
 	EM.newPlayerEnt();
+}
+
+float MNEngine::getTimeMS(){
+	return deltaClock.getElapsedTime().asMilliseconds();
 }
 
 MNEngine::MNEngine()

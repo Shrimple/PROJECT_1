@@ -3,7 +3,7 @@
 #define ANIMATIONTYPE_H
 
 enum AnimationType{
-	DEFAULT, ATTACK,
+	IDLE, RUNNING, WALKING, TAKE_DMG, ATTACK,
 };
 
 #endif

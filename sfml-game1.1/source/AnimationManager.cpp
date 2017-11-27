@@ -13,23 +13,27 @@ void AnimationManager::init(MNEngine* const ptr) {
 	std::cout << "Engine ptr @ " << enginePtr << "." << std::endl;
 }
 
-void AnimationManager::loadAnimFromEnt(boost::shared_ptr<Entity> e){
-	sf::Texture tex = enginePtr->TM.get(e->getTexIndex()); 
-	int frames = (tex.getSize().x / enginePtr->TILE_SIZE) * (tex.getSize().y / enginePtr->TILE_SIZE);
-	Animation anim(enginePtr, frames);
-	e->setAnim(anim);
+Animation * AnimationManager::loadNewAnimation(Entity * e, int f){
+	activeAnimations.push_back(new Animation(e, f));
+	return activeAnimations.back();
 }
 
-void AnimationManager::loadAnimFromP(Player * e) {
-	sf::Texture tex = enginePtr->TM.get(e->getTexIndex());
-	int frames = (tex.getSize().x / enginePtr->TILE_SIZE) * (tex.getSize().y / enginePtr->TILE_SIZE);
+void AnimationManager::update(){
+	cleanVector();
 
-	Animation anim(enginePtr, frames);
-	e->setAnim(anim);
+	for (Animation* a : activeAnimations) {
+		a->applyRect();
+	}
 }
 
-void AnimationManager::loadWorldAnim(TileMap * t) 
-{
+void AnimationManager::cleanVector(){
+	auto iter = std::find_if(activeAnimations.begin(), activeAnimations.end(),
+		[](Animation* a) { return (a->hasParent() == false); });
+
+		if(iter != activeAnimations.end()){
+			activeAnimations.erase(iter);
+		}
+
 }
 
 void AnimationManager::incCtr(){
@@ -40,13 +44,18 @@ void AnimationManager::incCtr(){
 }
 
 void AnimationManager::incAnimFrames(){
-	for (boost::shared_ptr<Entity> e : enginePtr->EM.getVec())
-		e->getAnim().incFrame();
+	for (Animation* a : activeAnimations)
+		a->incFrame();
 }
 
 AnimationManager::AnimationManager(){
+	enginePtr = NULL;
+	counter = 0;
 }
 
 
 AnimationManager::~AnimationManager(){
+	for (Animation* a : activeAnimations) {
+		delete a;
+	}
 }

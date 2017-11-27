@@ -31,7 +31,7 @@ void Camera::init(MNEngine* const ptr){
 
 	std::cout << "Camera properties set." << std::endl;
 
-	window->setFramerateLimit(50);
+	window->setFramerateLimit(60);
 	window->setView(*camera);
 
 	std::cout << "Window set to camera." << std::endl;

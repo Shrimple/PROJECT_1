@@ -8,7 +8,6 @@
 
 using namespace csp;
 
-
 Player::~Player() {
 }
 
@@ -41,20 +40,10 @@ void Player::pollMove() {
 
 	//debug key
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Insert)) {
-		if (Debug::isActive()) {
-			Debug::setState(false);
-		}
-		else {
-			Debug::setState(true);
-		}
-	}
-
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 
 		//If mouse is  in the debug menu - > cancel event for the game.
-		if (!ImGui::GetIO().WantCaptureMouse)
-		{
+		if (!ImGui::GetIO().WantCaptureMouse){
 			sf::Vector2f mousePosGame = sf::Vector2f(enginePtr->Cam.getMousePos().x*(enginePtr->Cam.camera->getSize().x / enginePtr->Cam.window->getSize().y), enginePtr->Cam.getMousePos().x*(enginePtr->Cam.camera->getSize().y / enginePtr->Cam.window->getSize().y));
 			enginePtr->EM.player->setTrajectory();
 

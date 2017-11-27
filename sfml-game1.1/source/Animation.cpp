@@ -1,27 +1,22 @@
 #include "Animation.h"
+#include <array>
 #include "TextureManager.h"
 #include "EntityManager.h"
 #include "Camera.h"
-#include <array>
+#include "Entity.h"
 #include "MNEngine.h"
 
-Animation::Animation(MNEngine* const ptr, const Animation &a){
-	parent = &ptr->AM;
+Animation::Animation(const Animation &a){
+	parent = a.parent;
 	currentFrame = a.currentFrame;
 	frames = a.frames;
 }
 
 
-Animation::Animation(MNEngine* const ptr, int framez){
-	parent = &ptr->AM;
+Animation::Animation(Entity* const ptr, int f){
+	parent = ptr;
 	currentFrame = 0;
-	frames = framez;
-}
-
-Animation::Animation(MNEngine* const ptr){
-	parent = &ptr->AM;
-	currentFrame = 0;
-	frames = 0;
+	frames = f;
 }
 
 Animation::Animation() {
@@ -31,6 +26,16 @@ Animation::Animation() {
 }
 
 Animation::~Animation(){
+}
+
+bool Animation::hasParent(){
+	return (parent == nullptr) ? false : true;
+}
+
+void Animation::setParentNULL(){
+	parent = nullptr;
+	frames = 0;
+	currentFrame = 0;
 }
 
 void Animation::incFrame(){
@@ -49,9 +54,13 @@ void Animation::decFrame(){
 	}
 }
 
+void Animation::applyRect(){
+	parent->setRect(getRect(parent->getTexIndex()));
+}
+
 sf::IntRect Animation::getRect(int texIndex){
 	sf::Texture tex = parent->enginePtr->TM.get(texIndex);
-	int x = (parent->enginePtr->TILE_SIZE*this->currentFrame) % tex.getSize().x;
+	int x = (parent->enginePtr->TILE_SIZE*currentFrame) % tex.getSize().x;
 	int y = 0;
 	return sf::IntRect(x, y, parent->enginePtr->TILE_SIZE, parent->enginePtr->TILE_SIZE);
 }

@@ -10,6 +10,8 @@ bool EntityManager::init(MNEngine* const ptr){
 }
 
 void EntityManager::updateEnts(TileMap * map){
+	cleanVector();
+
 	for (boost::shared_ptr<Entity> e : ent_ptrVec)
 		e->update();
 
@@ -25,7 +27,6 @@ std::vector<boost::shared_ptr<Entity>> EntityManager::getVec(){
 
 void EntityManager::newPlayerEnt(){
 	player = new Player(enginePtr, uuid);
-	enginePtr->AM.loadAnimFromP(player);
 	uuid++;
 }
 
@@ -33,19 +34,18 @@ void EntityManager::newEntity(int texIndex, int xOff, int yOff){
 	boost::shared_ptr<Entity> newEnt(new Entity(enginePtr, texIndex, csp::AI_ENEMY, xOff, yOff, uuid));
 	std::cout << "new entity | texIndex=" << texIndex << ", x=" << xOff << ", =" << yOff << std::endl;
 	ent_ptrVec.push_back(std::move(newEnt));
-	enginePtr->AM.loadAnimFromEnt(ent_ptrVec.back());
 	uuid++;
 }
 
-void EntityManager::annouceEntDeath(Entity* sender){
+void EntityManager::annouceEntDeath(int sender){
 	deadEntities.push_back(sender);
 }
 
 void EntityManager::cleanVector() {
 	if (deadEntities.size() > 0){
-		for (Entity* e : deadEntities) {
+		for (int id : deadEntities) {
 			auto iter = std::find_if(ent_ptrVec.begin(), ent_ptrVec.end(),
-				[e](boost::shared_ptr<Entity> f) { return (f->getId() == e->getId()); });
+				[id](boost::shared_ptr<Entity> f) { return (f->getId() == id); });
 
 			if (iter != ent_ptrVec.end()) {
 				ent_ptrVec.erase(iter);
@@ -65,11 +65,9 @@ Entity &EntityManager::getEnt(int i){
 	return *ent_ptrVec.at(i);
 }
 
-EntityManager::EntityManager()
-{
+EntityManager::EntityManager(){
 }
 
 
-EntityManager::~EntityManager()
-{
+EntityManager::~EntityManager(){
 }
